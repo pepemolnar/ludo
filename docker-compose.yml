@@ -1,0 +1,24 @@
+services:
+  games-app:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - 4000:4000
+      - 9229:9229
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/.pnpm-store
+      - /usr/src/app/node_modules
+    command: pnpm dev
+    environment:
+      PORT: 4000
+      IP: 0.0.0.0
+      DATABASE_URL: postgresql://postgres@postgres/games_app
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - 5432:5432  # enables connecting locally via psql
+    environment:
+      POSTGRES_DB: games_app
+      POSTGRES_HOST_AUTH_METHOD: trust
