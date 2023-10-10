@@ -1,3 +1,5 @@
+@import "../variables";
+
 .game{
     display: flex;
     padding: 40px;
@@ -5,18 +7,104 @@
     flex-direction: column;
     align-items: center;
 
-    .houses{
-        display: flex;
-
-        .house{
-            border: 2px solid #000000;
-            padding: 20px;
-        }
-    }
-
     .figure{
         padding: 10px;
         border: 1px solid #000000;
         border-radius: 10px;
+    }
+
+    .houses{
+        display: flex;
+        padding-bottom: 100px;
+
+        .house{
+            border: $basic_border;
+            padding: 20px;
+
+            &.red-house{
+                background-color: $player_red;
+            }
+            &.blue-house{
+                background-color: $player_blue;
+            }
+            &.green-house{
+                background-color: $player_green;
+            }
+            &.yellow-house{
+                background-color: $player_yellow;
+            }
+        }
+    }
+
+    .board{
+        position: relative;
+        border: $basic_border;
+
+        .field{
+            padding: 60px;
+        }
+
+        .field-block{
+            display: flex;
+
+            .red-field{
+                background-color: $player_red;
+            }
+            .blue-field{
+                background-color: $player_blue;
+            }
+            .green-field{
+                background-color: $player_green;
+            }
+            .yellow-field{
+                background-color: $player_yellow;
+            }
+
+            &.upper-row-field-block{
+                .field{
+                    border-bottom: $basic_border;
+
+                    &:not(:last-child){
+                        border-right: $basic_border;
+                    }
+                }
+            }
+            &.lower-row-field-block{
+                .field{
+                    border-top: $basic_border;
+
+                    &:not(:first-child){
+                        border-left: $basic_border;
+                    }
+                }
+            }
+            &.right-column-field-block{
+                flex-direction: column;
+                align-items: flex-end;
+
+                .field{
+                    border-left: $basic_border;
+
+                    &:not(:last-child){
+                        border-bottom: $basic_border;
+                    }
+                }
+            }
+            &.left-column-field-block{
+                flex-direction: column;
+                align-items: flex-start;
+                position: absolute;
+                top: 122px;
+                
+                .field{
+                    border-right: $basic_border;
+
+                    &:not(:last-child){
+                        border-bottom: $basic_border;
+                    }
+                }
+            }
+        }
+        
     }
 }
