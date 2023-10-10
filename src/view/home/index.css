@@ -85,4 +85,23 @@
 }
 .game .board .field-block.left-column-field-block .field:not(:last-child) {
   border-bottom: 2px solid #000000;
+}
+.game .board .cubes {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-gap: 40px;
+}
+.game .board .cubes .number {
+  font-size: 48px;
+  font-weight: 700;
+}
+.game .board .cubes .roll-button-container .roll-button {
+  padding: 10px 40px;
+  border: 2px solid #000000;
+}
+.game .board .cubes .roll-button-container .roll-button:hover {
+  background-color: #c1c1c1;
 }/*# sourceMappingURL=index.css.map */

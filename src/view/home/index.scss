@@ -106,5 +106,29 @@
             }
         }
         
+        .cubes{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: grid;
+            grid-gap: 40px;
+
+            .number{
+                font-size: 48px;
+                font-weight: 700;
+            }
+
+            .roll-button-container{
+                .roll-button{
+                    padding: 10px 40px;
+                    border: $basic_border;
+
+                    &:hover{
+                        background-color: #c1c1c1;
+                    }
+                }
+            }
+        }
     }
 }
