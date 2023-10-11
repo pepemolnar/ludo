@@ -33,6 +33,10 @@
             &.yellow-house{
                 background-color: $player_yellow;
             }
+
+            &[active="true"]{
+                border: 2px solid white;
+            }
         }
     }
 
@@ -114,7 +118,7 @@
             display: grid;
             grid-gap: 40px;
 
-            .number{
+            .rolled-number{
                 font-size: 48px;
                 font-weight: 700;
             }

@@ -2,11 +2,12 @@
     "extends": "@tsconfig/node18/tsconfig.json",
     "compilerOptions": {
         "lib": [
-        "ESNext"
+            "DOM",
+        "ES6"
         ],
-        "module": "ESNext",
+        "module": "CommonJS",
         "moduleResolution": "Node",
-        "target": "ESNext",
+        "target": "ES6",
         "outDir": "dist"
     },
     "include": [
