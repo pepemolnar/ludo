@@ -6,4 +6,4 @@ export const routes = express.Router();
 
 routes.use(homeRoutes);
 routes.use('/user', userRoutes);
-routes.use(express.static('src/view'));
+routes.use(express.static('dist/view'));
