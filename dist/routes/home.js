@@ -1,4 +1,3 @@
-"use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -25,13 +24,24 @@ var __importStar = (this && this.__importStar) || function (mod) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.homeRoutes = void 0;
-const express_1 = __importDefault(require("express"));
-const fs = __importStar(require("fs"));
-exports.homeRoutes = express_1.default.Router();
-exports.homeRoutes.get('/', (req, res) => {
-    const content = fs.readFileSync('src/view/home/home.html', 'utf-8');
-    res.setHeader('Content-Type', 'text/html');
-    res.status(200).send(content);
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "express", "fs"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.homeRoutes = void 0;
+    const express_1 = __importDefault(require("express"));
+    const fs = __importStar(require("fs"));
+    exports.homeRoutes = express_1.default.Router();
+    exports.homeRoutes.get('/', (req, res) => {
+        const content = fs.readFileSync('src/view/home/home.html', 'utf-8');
+        res.setHeader('Content-Type', 'text/html');
+        res.status(200).send(content);
+    });
 });

@@ -5,7 +5,7 @@
             "DOM",
         "ES6"
         ],
-        "module": "CommonJS",
+        "module": "UMD",
         "moduleResolution": "Node",
         "target": "ES6",
         "outDir": "dist"

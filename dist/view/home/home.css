@@ -9,6 +9,26 @@
   padding: 10px;
   border: 1px solid #000000;
   border-radius: 10px;
+  pointer-events: none;
+  cursor: default;
+}
+.game .figure.red-figure {
+  background-color: #d80000;
+}
+.game .figure.blue-figure {
+  background-color: #201cff;
+}
+.game .figure.green-figure {
+  background-color: #19d400;
+}
+.game .figure.yellow-figure {
+  background-color: #fff831;
+}
+.game .figure[selectable=true] {
+  pointer-events: all;
+  cursor: pointer;
+  box-shadow: inset 0px 0px 0px 2px #ffffff;
+  border: 2px solid #000000;
 }
 .game .houses {
   display: flex;
@@ -16,7 +36,12 @@
 }
 .game .houses .house {
   border: 2px solid #000000;
-  padding: 20px;
+  width: 150px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  grid-gap: 5px;
+  justify-content: center;
 }
 .game .houses .house.red-house {
   background-color: #d80000;
@@ -31,14 +56,19 @@
   background-color: #fff831;
 }
 .game .houses .house[active=true] {
-  border: 2px solid white;
+  box-shadow: inset 0px 0px 0px 2px #ffffff;
 }
 .game .board {
   position: relative;
-  border: 2px solid #000000;
+  border: 1px solid #000000;
 }
 .game .board .field {
-  padding: 60px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000000;
 }
 .game .board .field-block {
   display: flex;
@@ -55,17 +85,11 @@
 .game .board .field-block .yellow-field {
   background-color: #fff831;
 }
-.game .board .field-block.upper-row-field-block .field {
+.game .board .field-block.upper-row-field-block .field:not(:first-child):not(:last-child) {
   border-bottom: 2px solid #000000;
 }
-.game .board .field-block.upper-row-field-block .field:not(:last-child) {
-  border-right: 2px solid #000000;
-}
-.game .board .field-block.lower-row-field-block .field {
+.game .board .field-block.lower-row-field-block .field:not(:first-child):not(:last-child) {
   border-top: 2px solid #000000;
-}
-.game .board .field-block.lower-row-field-block .field:not(:first-child) {
-  border-left: 2px solid #000000;
 }
 .game .board .field-block.right-column-field-block {
   flex-direction: column;
@@ -74,22 +98,16 @@
 .game .board .field-block.right-column-field-block .field {
   border-left: 2px solid #000000;
 }
-.game .board .field-block.right-column-field-block .field:not(:last-child) {
-  border-bottom: 2px solid #000000;
-}
 .game .board .field-block.left-column-field-block {
   flex-direction: column;
   align-items: flex-start;
   position: absolute;
-  top: 122px;
+  top: 60px;
 }
 .game .board .field-block.left-column-field-block .field {
   border-right: 2px solid #000000;
 }
-.game .board .field-block.left-column-field-block .field:not(:last-child) {
-  border-bottom: 2px solid #000000;
-}
-.game .board .cubes {
+.game .board .dice-block {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -97,14 +115,20 @@
   display: grid;
   grid-gap: 40px;
 }
-.game .board .cubes .rolled-number {
+.game .board .dice-block .rolled-number {
   font-size: 48px;
   font-weight: 700;
 }
-.game .board .cubes .roll-button-container .roll-button {
+.game .board .dice-block .roll-button-container .roll-button {
   padding: 10px 40px;
   border: 2px solid #000000;
+  pointer-events: none;
+  cursor: default;
 }
-.game .board .cubes .roll-button-container .roll-button:hover {
+.game .board .dice-block .roll-button-container .roll-button:hover {
   background-color: #c1c1c1;
+}
+.game .board .dice-block .roll-button-container .roll-button[active=true] {
+  pointer-events: all;
+  cursor: pointer;
 }/*# sourceMappingURL=home.css.map */

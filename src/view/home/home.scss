@@ -11,6 +11,28 @@
         padding: 10px;
         border: 1px solid #000000;
         border-radius: 10px;
+        pointer-events: none;
+        cursor: default;
+
+        &.red-figure{
+            background-color: $player_red;
+        }
+        &.blue-figure{
+            background-color: $player_blue;
+        }
+        &.green-figure{
+            background-color: $player_green;
+        }
+        &.yellow-figure{
+            background-color: $player_yellow;
+        }
+
+        &[selectable="true"]{
+            pointer-events: all;
+            cursor: pointer;
+            box-shadow: inset 0px 0px 0px 2px #ffffff;
+            border: $basic_border;
+        }
     }
 
     .houses{
@@ -19,7 +41,12 @@
 
         .house{
             border: $basic_border;
-            padding: 20px;
+            width: 150px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            grid-gap: 5px;
+            justify-content: center;
 
             &.red-house{
                 background-color: $player_red;
@@ -35,17 +62,22 @@
             }
 
             &[active="true"]{
-                border: 2px solid white;
+                box-shadow: inset 0px 0px 0px 2px #ffffff;
             }
         }
     }
 
     .board{
         position: relative;
-        border: $basic_border;
+        border: $thin_border;
 
         .field{
-            padding: 60px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: $thin_border;
         }
 
         .field-block{
@@ -65,21 +97,13 @@
             }
 
             &.upper-row-field-block{
-                .field{
+                .field:not(:first-child):not(:last-child){
                     border-bottom: $basic_border;
-
-                    &:not(:last-child){
-                        border-right: $basic_border;
-                    }
                 }
             }
             &.lower-row-field-block{
-                .field{
+                .field:not(:first-child):not(:last-child){
                     border-top: $basic_border;
-
-                    &:not(:first-child){
-                        border-left: $basic_border;
-                    }
                 }
             }
             &.right-column-field-block{
@@ -88,29 +112,21 @@
 
                 .field{
                     border-left: $basic_border;
-
-                    &:not(:last-child){
-                        border-bottom: $basic_border;
-                    }
                 }
             }
             &.left-column-field-block{
                 flex-direction: column;
                 align-items: flex-start;
                 position: absolute;
-                top: 122px;
-                
+                top: 60px;
+
                 .field{
                     border-right: $basic_border;
-
-                    &:not(:last-child){
-                        border-bottom: $basic_border;
-                    }
                 }
             }
         }
         
-        .cubes{
+        .dice-block{
             position: absolute;
             top: 50%;
             left: 50%;
@@ -127,9 +143,15 @@
                 .roll-button{
                     padding: 10px 40px;
                     border: $basic_border;
+                    pointer-events: none;
+                    cursor: default;
 
                     &:hover{
                         background-color: #c1c1c1;
+                    }
+                    &[active="true"]{
+                        pointer-events: all;
+                        cursor: pointer;
                     }
                 }
             }
