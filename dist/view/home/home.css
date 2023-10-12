@@ -66,6 +66,7 @@
   width: 60px;
   height: 60px;
   display: flex;
+  grid-gap: 5px;
   align-items: center;
   justify-content: center;
   border: 1px solid #000000;
@@ -113,7 +114,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   display: grid;
-  grid-gap: 40px;
+  grid-gap: 20px;
 }
 .game .board .dice-block .rolled-number {
   font-size: 48px;
@@ -131,4 +132,33 @@
 .game .board .dice-block .roll-button-container .roll-button[active=true] {
   pointer-events: all;
   cursor: pointer;
+}
+.game .goal-blocks {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 40px;
+  align-items: center;
+  padding-top: 60px;
+}
+.game .goal-blocks .goal-block {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+}
+.game .goal-blocks .goal-block .goal {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #000000;
+}
+.game .goal-blocks .goal-block .goal.red-goal {
+  background-color: #d80000;
+}
+.game .goal-blocks .goal-block .goal.blue-goal {
+  background-color: #201cff;
+}
+.game .goal-blocks .goal-block .goal.green-goal {
+  background-color: #19d400;
+}
+.game .goal-blocks .goal-block .goal.yellow-goal {
+  background-color: #fff831;
 }/*# sourceMappingURL=home.css.map */

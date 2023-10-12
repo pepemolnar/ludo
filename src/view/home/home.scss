@@ -75,6 +75,7 @@
             width: 60px;
             height: 60px;
             display: flex;
+            grid-gap: 5px;
             align-items: center;
             justify-content: center;
             border: $thin_border;
@@ -132,7 +133,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             display: grid;
-            grid-gap: 40px;
+            grid-gap: 20px;
 
             .rolled-number{
                 font-size: 48px;
@@ -153,6 +154,39 @@
                         pointer-events: all;
                         cursor: pointer;
                     }
+                }
+            }
+        }
+    }
+
+    .goal-blocks{
+        display: flex;
+        flex-direction: column;
+        grid-gap: 40px;
+        align-items: center;
+        padding-top: 60px;
+
+        .goal-block{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 20px;
+
+            .goal{
+                width: 40px;
+                height: 40px;
+                border: $basic_border;
+
+                &.red-goal{
+                    background-color: $player_red;
+                }
+                &.blue-goal{
+                    background-color: $player_blue;
+                }
+                &.green-goal{
+                    background-color: $player_green;
+                }
+                &.yellow-goal{
+                    background-color: $player_yellow;
                 }
             }
         }

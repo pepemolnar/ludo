@@ -72,7 +72,7 @@ export class Player implements PlayerInterface {
     return this.setFiguresSelectability();
   }
 
-  stepWithFigure(figureId: number): void {
+  stepWithFigure(figureId: number, numberOfFields: number): void {
     const figure = this.figures.find((figure) => figure.id === figureId);
 
     if (!figure) {
@@ -80,7 +80,7 @@ export class Player implements PlayerInterface {
       return;
     }
 
-    figure.step(this.rolledNumber);
+    figure.step(this.rolledNumber, numberOfFields);
     this.removeSelectabilityFromFigures();
   }
 

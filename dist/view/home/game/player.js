@@ -62,13 +62,13 @@
             this.setRolledNumberDOM(rolledNumber);
             return this.setFiguresSelectability();
         }
-        stepWithFigure(figureId) {
+        stepWithFigure(figureId, numberOfFields) {
             const figure = this.figures.find((figure) => figure.id === figureId);
             if (!figure) {
                 console.log('Figure selected does not exists!');
                 return;
             }
-            figure.step(this.rolledNumber);
+            figure.step(this.rolledNumber, numberOfFields);
             this.removeSelectabilityFromFigures();
         }
         setRolledNumberDOM(rolledNumber) {

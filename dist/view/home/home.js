@@ -12,7 +12,7 @@
     const playerConstants_1 = require("../constants/playerConstants");
     const game_1 = require("./game/game");
     window.onload = (event) => {
-        const game = new game_1.Game(playerConstants_1.PLAYERS);
+        const game = new game_1.Game({ players: playerConstants_1.PLAYERS, numberOfFields: 16 });
         const rollButtonDOM = document.getElementById('roll_button');
         const figuresDOM = document.querySelectorAll('.figure');
         rollButtonDOM === null || rollButtonDOM === void 0 ? void 0 : rollButtonDOM.addEventListener('click', () => {
@@ -21,8 +21,7 @@
         figuresDOM.forEach((item) => {
             item.addEventListener('click', (event) => {
                 const figureId = Number(item.getAttribute('data-number'));
-                const playerColor = String(item.getAttribute('data-color'));
-                game.selectFigureToMove(playerColor, figureId);
+                game.selectFigureToMove(figureId);
             });
         });
     };

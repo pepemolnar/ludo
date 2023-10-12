@@ -13,9 +13,8 @@ window.onload = (event) => {
   figuresDOM.forEach((item) => {
     item.addEventListener('click', (event) => {
       const figureId = Number(item.getAttribute('data-number'));
-      const playerColor = String(item.getAttribute('data-color'));
 
-      game.selectFigureToMove(playerColor, figureId);
+      game.selectFigureToMove(figureId);
     });
   });
 };

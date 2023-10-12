@@ -59,8 +59,11 @@ export class Game implements GameInterface {
     }
   }
 
-  selectFigureToMove(playerColor: string, figureId: number): void {
-    this.players[this.activePlayerIndex].stepWithFigure(figureId);
+  selectFigureToMove(figureId: number): void {
+    this.players[this.activePlayerIndex].stepWithFigure(
+      figureId,
+      this.numberOfFields
+    );
 
     this.activateNextPlayer();
   }

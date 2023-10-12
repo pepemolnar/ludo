@@ -12,9 +12,10 @@
     exports.Game = void 0;
     const player_1 = require("./player");
     class Game {
-        constructor(players) {
+        constructor(game) {
             this.rollButtonDOM = document.getElementById('roll_button');
-            this.createPlayers(players);
+            this.numberOfFields = game.numberOfFields;
+            this.createPlayers(game.players);
             this.start();
         }
         start() {
@@ -50,8 +51,8 @@
                 this.activateNextPlayer();
             }
         }
-        selectFigureToMove(playerColor, figureId) {
-            this.players[this.activePlayerIndex].stepWithFigure(figureId);
+        selectFigureToMove(figureId) {
+            this.players[this.activePlayerIndex].stepWithFigure(figureId, this.numberOfFields);
             this.activateNextPlayer();
         }
     }
