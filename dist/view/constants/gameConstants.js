@@ -13,6 +13,6 @@
     const playerConstants_1 = require("./playerConstants");
     exports.GAME_CONFIG = {
         players: playerConstants_1.PLAYERS,
-        numberOfFields: 16
+        numberOfFields: 20
     };
 });
