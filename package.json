@@ -33,7 +33,7 @@
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "build": "rimraf dist/ && tsc && copyfiles -u 1 src/**/*.html src/**/*.css dist/",
+    "build": "rimraf dist/ && tsc && copyfiles -u 1 \"src/**/*.html\" \"src/**/*.css\" dist/",
     "start": "node dist/index.js",
     "local": "npx nodemon src/index.ts",
     "dev": "pnpm build && node --inspect=0.0.0.0 dist/index.js"

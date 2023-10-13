@@ -81,7 +81,7 @@
             }
             if (this.positionType === gameTypes_1.PositionType.IN_GAME &&
                 this.position < this.stepOutPosition) {
-                return this.position + rolledNumber > this.stepOutPosition + 4;
+                return this.position + rolledNumber > this.stepOutPosition + 3;
             }
             return false;
         }
