@@ -39,8 +39,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const express_1 = __importDefault(require("express"));
     const fs = __importStar(require("fs"));
     exports.homeRoutes = express_1.default.Router();
-    exports.homeRoutes.get('/', (req, res) => {
-        const content = fs.readFileSync('src/view/home/home.html', 'utf-8');
+    exports.homeRoutes.get('/16', (req, res) => {
+        const content = fs.readFileSync('src/view/home/map_16/home.html', 'utf-8');
+        res.setHeader('Content-Type', 'text/html');
+        res.status(200).send(content);
+    });
+    exports.homeRoutes.get('/20', (req, res) => {
+        const content = fs.readFileSync('src/view/home/map_20/home.html', 'utf-8');
         res.setHeader('Content-Type', 'text/html');
         res.status(200).send(content);
     });

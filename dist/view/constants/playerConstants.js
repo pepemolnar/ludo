@@ -9,8 +9,26 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.PLAYERS = void 0;
-    exports.PLAYERS = [
+    exports.PLAYERS_20 = exports.PLAYERS_16 = void 0;
+    exports.PLAYERS_16 = [
+        {
+            color: 'red',
+            startPosition: 1
+        },
+        {
+            color: 'blue',
+            startPosition: 5
+        },
+        {
+            color: 'green',
+            startPosition: 11
+        },
+        {
+            color: 'yellow',
+            startPosition: 13
+        }
+    ];
+    exports.PLAYERS_20 = [
         {
             color: 'red',
             startPosition: 1
