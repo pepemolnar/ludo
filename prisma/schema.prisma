@@ -11,7 +11,20 @@ datasource db {
 }
 
 model User {
-  id   Int    @id @default(autoincrement())
-  name String
-  age  Int
+  id     Int      @id @default(autoincrement())
+  name   String
+  age    Int
+  Player Player[]
+}
+
+model Game {
+  id        Int    @id @default(autoincrement())
+  gameId    String
+  boardSize Int
+}
+
+model Player {
+  id     Int  @id @default(autoincrement())
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
 }

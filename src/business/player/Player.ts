@@ -1,7 +1,7 @@
 import { FigureInterface } from '../../types/figureTypes';
 import { Position, PositionType } from '../../types/gameTypes';
 import { PlayerColor, PlayerInterface } from '../../types/playerTypes';
-import { Figure } from './figure';
+import { Figure } from '../figure/Figure';
 
 export class Player implements PlayerInterface {
   active: boolean;
