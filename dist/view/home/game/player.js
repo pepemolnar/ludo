@@ -4,31 +4,32 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./figure"], factory);
+        define(["require", "exports", "../../types/gameTypes", "./figure"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Player = void 0;
+    const gameTypes_1 = require("../../types/gameTypes");
     const figure_1 = require("./figure");
-    var PlayerStatus;
-    (function (PlayerStatus) {
-        PlayerStatus[PlayerStatus["INGAME"] = 0] = "INGAME";
-        PlayerStatus[PlayerStatus["DONE"] = 1] = "DONE";
-    })(PlayerStatus || (PlayerStatus = {}));
     class Player {
         constructor(player) {
             this.color = player.color;
             this.active = false;
             this.figures = [];
-            this.rolledNumber = 0;
-            this.status = PlayerStatus.INGAME;
             this.startPosition = player.startPosition;
             this.playerHouseDOM = document.getElementById(`${this.color.toLowerCase()}_house`);
             this.createFigures();
         }
         isActive() {
             return this.active;
+        }
+        activate() {
+            this.setActivity(true);
+        }
+        deactivate() {
+            this.removeSelectabilityFromFigures();
+            this.setActivity(false);
         }
         setActivity(active) {
             var _a;
@@ -46,30 +47,24 @@
                 this.figures.push(new figure_1.Figure(figure));
             }
         }
-        setFiguresSelectability() {
-            let selectableFigureCount = 0;
+        getIndexOfSelectableFiguresToMove(rolledNumber, numberOfFields) {
+            const indexOfSelectableFiguresToMove = [];
             for (const figure of this.figures) {
-                if (this.active && figure.isFigureSelectable(this.rolledNumber)) {
+                const figureCanMove = figure.canFigureMoveToNewPosition(rolledNumber);
+                const newPosition = figure.getNewPosition(rolledNumber, numberOfFields);
+                const figuresNewPositionInGoalIsAlreadyTaken = newPosition.positionType === gameTypes_1.PositionType.IN_GOAL &&
+                    this.isGoalPositionTaken(newPosition.position);
+                if (figureCanMove && !figuresNewPositionInGoalIsAlreadyTaken) {
                     figure.setSelectability(true);
-                    selectableFigureCount += 1;
+                    indexOfSelectableFiguresToMove.push(figure.id);
                 }
             }
-            return selectableFigureCount;
+            return indexOfSelectableFiguresToMove;
         }
-        rollTheDice() {
-            const rolledNumber = Math.round(Math.random() * 5 + 1);
-            this.rolledNumber = rolledNumber;
-            this.setRolledNumberDOM(rolledNumber);
-            return this.setFiguresSelectability();
-        }
-        stepWithFigure(figureId, numberOfFields) {
-            const figure = this.figures.find((figure) => figure.id === figureId);
-            if (!figure) {
-                console.log('Figure selected does not exists!');
-                return;
+        activateFiguresByIndex(indexOfSelectableFiguresToMove) {
+            for (const figureIndex of indexOfSelectableFiguresToMove) {
+                this.figures[figureIndex].setSelectability(true);
             }
-            figure.step(this.rolledNumber, numberOfFields);
-            this.removeSelectabilityFromFigures();
         }
         setRolledNumberDOM(rolledNumber) {
             const rolledNumberDOM = document.getElementById('rolled_number');
@@ -83,6 +78,20 @@
             for (const figure of this.figures) {
                 figure.setSelectability(false);
             }
+        }
+        isGoalPositionTaken(position) {
+            for (const figure of this.figures) {
+                if (figure.positionType === gameTypes_1.PositionType.IN_GOAL &&
+                    figure.position === position) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        getFigurePositions() {
+            return this.figures.map((figure) => {
+                return { position: figure.position, positionType: figure.positionType };
+            });
         }
     }
     exports.Player = Player;

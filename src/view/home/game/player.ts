@@ -1,17 +1,11 @@
 import { FigureInterface } from '../../types/figureTypes';
+import { Position, PositionType } from '../../types/gameTypes';
 import { PlayerColor, PlayerInterface } from '../../types/playerTypes';
 import { Figure } from './figure';
 
-enum PlayerStatus {
-  INGAME,
-  DONE
-}
-
 export class Player implements PlayerInterface {
-  status: PlayerStatus;
   active: boolean;
   color: PlayerColor;
-  rolledNumber: number;
   figures: Figure[];
   startPosition: number;
 
@@ -21,8 +15,6 @@ export class Player implements PlayerInterface {
     this.color = player.color;
     this.active = false;
     this.figures = [];
-    this.rolledNumber = 0;
-    this.status = PlayerStatus.INGAME;
     this.startPosition = player.startPosition;
     this.playerHouseDOM = document.getElementById(
       `${this.color.toLowerCase()}_house`
@@ -34,7 +26,16 @@ export class Player implements PlayerInterface {
     return this.active;
   }
 
-  setActivity(active: boolean): void {
+  activate(): void {
+    this.setActivity(true);
+  }
+
+  deactivate(): void {
+    this.removeSelectabilityFromFigures();
+    this.setActivity(false);
+  }
+
+  private setActivity(active: boolean): void {
     this.active = active;
 
     this.playerHouseDOM?.setAttribute('active', String(active));
@@ -52,36 +53,32 @@ export class Player implements PlayerInterface {
     }
   }
 
-  setFiguresSelectability(): number {
-    let selectableFigureCount = 0;
+  getIndexOfSelectableFiguresToMove(
+    rolledNumber: number,
+    numberOfFields: number
+  ): number[] {
+    const indexOfSelectableFiguresToMove = [];
+
     for (const figure of this.figures) {
-      if (this.active && figure.isFigureSelectable(this.rolledNumber)) {
+      const figureCanMove = figure.canFigureMoveToNewPosition(rolledNumber);
+      const newPosition = figure.getNewPosition(rolledNumber, numberOfFields);
+      const figuresNewPositionInGoalIsAlreadyTaken =
+        newPosition.positionType === PositionType.IN_GOAL &&
+        this.isGoalPositionTaken(newPosition.position);
+
+      if (figureCanMove && !figuresNewPositionInGoalIsAlreadyTaken) {
         figure.setSelectability(true);
-        selectableFigureCount += 1;
+        indexOfSelectableFiguresToMove.push(figure.id);
       }
     }
-    return selectableFigureCount;
+
+    return indexOfSelectableFiguresToMove;
   }
 
-  rollTheDice(): number {
-    const rolledNumber = Math.round(Math.random() * 5 + 1);
-
-    this.rolledNumber = rolledNumber;
-    this.setRolledNumberDOM(rolledNumber);
-
-    return this.setFiguresSelectability();
-  }
-
-  stepWithFigure(figureId: number, numberOfFields: number): void {
-    const figure = this.figures.find((figure) => figure.id === figureId);
-
-    if (!figure) {
-      console.log('Figure selected does not exists!');
-      return;
+  activateFiguresByIndex(indexOfSelectableFiguresToMove: number[]): void {
+    for (const figureIndex of indexOfSelectableFiguresToMove) {
+      this.figures[figureIndex].setSelectability(true);
     }
-
-    figure.step(this.rolledNumber, numberOfFields);
-    this.removeSelectabilityFromFigures();
   }
 
   setRolledNumberDOM(rolledNumber: number): void {
@@ -99,5 +96,23 @@ export class Player implements PlayerInterface {
     for (const figure of this.figures) {
       figure.setSelectability(false);
     }
+  }
+
+  isGoalPositionTaken(position: number): boolean {
+    for (const figure of this.figures) {
+      if (
+        figure.positionType === PositionType.IN_GOAL &&
+        figure.position === position
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  getFigurePositions(): Position[] {
+    return this.figures.map((figure) => {
+      return { position: figure.position, positionType: figure.positionType };
+    });
   }
 }

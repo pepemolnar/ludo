@@ -1,8 +1,8 @@
-import { PLAYERS } from '../constants/playerConstants';
+import { GAME_CONFIG } from '../constants/gameConstants';
 import { Game } from './game/game';
 
 window.onload = (event) => {
-  const game = new Game({ players: PLAYERS, numberOfFields: 16 });
+  const game = new Game(GAME_CONFIG);
   const rollButtonDOM = document.getElementById('roll_button');
   const figuresDOM = document.querySelectorAll('.figure');
 

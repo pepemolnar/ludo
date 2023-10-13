@@ -9,4 +9,11 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.PositionType = void 0;
+    var PositionType;
+    (function (PositionType) {
+        PositionType[PositionType["IN_HOUSE"] = 0] = "IN_HOUSE";
+        PositionType[PositionType["IN_GAME"] = 1] = "IN_GAME";
+        PositionType[PositionType["IN_GOAL"] = 2] = "IN_GOAL";
+    })(PositionType || (exports.PositionType = PositionType = {}));
 });

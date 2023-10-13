@@ -44,4 +44,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         res.setHeader('Content-Type', 'text/html');
         res.status(200).send(content);
     });
+    exports.homeRoutes.get('/game-over', (req, res) => {
+        const winner = String(req.query.winner);
+        res.setHeader('Content-Type', 'text/html');
+        res.status(200).send(`<h1>Winner is ${winner}</h1>`);
+    });
 });
