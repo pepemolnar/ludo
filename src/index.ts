@@ -1,7 +1,21 @@
-import * as _ from "lodash";
+import 'express-async-errors';
+import express from 'express';
+import morgan from 'morgan';
+import bodyParser from 'body-parser';
+import { routes } from './routes/routes';
+import { globalErrorHandler } from './middlewares/GlobalErrorHandler';
 
-const numbers = [1, 5, 8, 10, 1, 5, 15, 42, 5];
+const port = process.env.PORT ?? 3000;
+const ip = process.env.IP ?? '127.0.0.1';
 
-const uniqNumbers = _.uniq(numbers);
+const app = express();
 
-console.log(uniqNumbers);
+app.use(morgan('dev'));
+app.use(bodyParser.json({ limit: '100mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(routes);
+app.use(globalErrorHandler);
+
+app.listen(Number(port), ip, () => {
+  console.log(`Server is running on port ${port}`);
+});
