@@ -4,14 +4,14 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../types/gameTypes", "./player"], factory);
+        define(["require", "exports", "../../types/gameTypes", "../player/Player"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Game = void 0;
     const gameTypes_1 = require("../../types/gameTypes");
-    const player_1 = require("./player");
+    const Player_1 = require("../player/Player");
     class Game {
         constructor(game) {
             this.rollButtonDOM = document.getElementById('roll_button');
@@ -27,7 +27,7 @@
         createPlayers(players) {
             const newPlayers = [];
             for (let i = 0; i < players.length; i++) {
-                const newPlayer = new player_1.Player(players[i]);
+                const newPlayer = new Player_1.Player(players[i]);
                 newPlayers.push(newPlayer);
             }
             this.players = newPlayers;

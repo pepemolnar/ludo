@@ -18,7 +18,11 @@ gameRoutes.get('/', (req: Request, res: Response) => {
   }
 
   // const gameStatus = getGameStatus(gameID);
-  const content = fs.readFileSync('view/home/home.html', 'utf-8');
+});
+
+gameRoutes.get('/:gameId', (req: Request, res: Response) => {
+  const gameId = req.params.gameId;
+  const content = fs.readFileSync('view/game/game.html', 'utf-8');
   res.setHeader('Content-Type', 'text/html');
   res.status(200).send(content);
 });

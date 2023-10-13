@@ -4,14 +4,14 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../types/gameTypes", "./figure"], factory);
+        define(["require", "exports", "../../types/gameTypes", "../figure/Figure"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.Player = void 0;
     const gameTypes_1 = require("../../types/gameTypes");
-    const figure_1 = require("./figure");
+    const Figure_1 = require("../figure/Figure");
     class Player {
         constructor(player) {
             this.color = player.color;
@@ -44,7 +44,7 @@
                     color: this.color,
                     stepOutPosition: this.startPosition
                 };
-                this.figures.push(new figure_1.Figure(figure));
+                this.figures.push(new Figure_1.Figure(figure));
             }
         }
         getIndexOfSelectableFiguresToMove(rolledNumber, numberOfFields) {

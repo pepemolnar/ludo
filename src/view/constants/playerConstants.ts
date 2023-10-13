@@ -1,4 +1,4 @@
-import { PlayerInterface } from '../types/playerTypes';
+import { PlayerInterface } from '../../types/playerTypes';
 
 export const PLAYERS: PlayerInterface[] = [
   {

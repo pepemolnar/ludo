@@ -1,4 +1,4 @@
-import { PlayerInterface } from './playerTypes';
+import { PlayerInterface } from '../../types/playerTypes';
 
 export interface GameInterface {
   players: PlayerInterface[];

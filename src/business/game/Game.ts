@@ -5,7 +5,7 @@ import {
   PositionType
 } from '../../types/gameTypes';
 import { PlayerInterface } from '../../types/playerTypes';
-import { Player } from './player';
+import { Player } from '../player/Player';
 
 export class Game implements GameInterface {
   players!: Player[];

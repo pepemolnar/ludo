@@ -4,7 +4,7 @@ import { GAME_CONFIG } from '../constants/gameConstants';
 
 export const createGame = (): string => {
   const gameID = uuidv4();
-  const game = new Game(GAME_CONFIG);
+  // const game = new Game(GAME_CONFIG);
 
   return gameID;
 };
