@@ -2,8 +2,12 @@
     "extends": "@tsconfig/node18/tsconfig.json",
     "compilerOptions": {
         "lib": [
-        "ESNext"
+            "DOM",
+        "ES6"
         ],
+        "module": "UMD",
+        "moduleResolution": "Node",
+        "target": "ES6",
         "outDir": "dist"
     },
     "include": [

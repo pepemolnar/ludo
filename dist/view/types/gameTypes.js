@@ -9,14 +9,11 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.CustomError = void 0;
-    class CustomError extends Error {
-        constructor(message, statusCode, logging) {
-            super(message);
-            this.message = message;
-            this.statusCode = statusCode !== null && statusCode !== void 0 ? statusCode : 500;
-            this.logging = logging !== null && logging !== void 0 ? logging : false;
-        }
-    }
-    exports.CustomError = CustomError;
+    exports.PositionType = void 0;
+    var PositionType;
+    (function (PositionType) {
+        PositionType[PositionType["IN_HOUSE"] = 0] = "IN_HOUSE";
+        PositionType[PositionType["IN_GAME"] = 1] = "IN_GAME";
+        PositionType[PositionType["IN_GOAL"] = 2] = "IN_GOAL";
+    })(PositionType || (exports.PositionType = PositionType = {}));
 });

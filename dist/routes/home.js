@@ -1,24 +1,52 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-Object.defineProperty(exports, "homeRoutes", {
-    enumerable: true,
-    get: function() {
-        return homeRoutes;
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
     }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
 });
-const _express = /*#__PURE__*/ _interop_require_default(require("express"));
-function _interop_require_default(obj) {
-    return obj && obj.__esModule ? obj : {
-        default: obj
-    };
-}
-const homeRoutes = _express.default.Router();
-homeRoutes.get("/", (req, res)=>{
-    res.status(200).json({
-        asd: "asdf"
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "express", "fs"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.homeRoutes = void 0;
+    const express_1 = __importDefault(require("express"));
+    const fs = __importStar(require("fs"));
+    exports.homeRoutes = express_1.default.Router();
+    exports.homeRoutes.get('/', (req, res) => {
+        const content = fs.readFileSync('src/view/home/home.html', 'utf-8');
+        res.setHeader('Content-Type', 'text/html');
+        res.status(200).send(content);
+    });
+    exports.homeRoutes.get('/game-over', (req, res) => {
+        const winner = String(req.query.winner);
+        res.setHeader('Content-Type', 'text/html');
+        res.status(200).send(`<h1>Winner is ${winner}</h1>`);
     });
 });
-
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9yb3V0ZXMvaG9tZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgZXhwcmVzcyBmcm9tICdleHByZXNzJztcclxuXHJcbmV4cG9ydCBjb25zdCBob21lUm91dGVzID0gZXhwcmVzcy5Sb3V0ZXIoKTtcclxuXHJcbmhvbWVSb3V0ZXMuZ2V0KCcvJywgKHJlcSwgcmVzKSA9PiB7XHJcbiAgcmVzLnN0YXR1cygyMDApLmpzb24oeyBhc2Q6ICdhc2RmJyB9KTtcclxufSk7XHJcbiJdLCJuYW1lcyI6WyJob21lUm91dGVzIiwiZXhwcmVzcyIsIlJvdXRlciIsImdldCIsInJlcSIsInJlcyIsInN0YXR1cyIsImpzb24iLCJhc2QiXSwibWFwcGluZ3MiOiI7Ozs7K0JBRWFBOzs7ZUFBQUE7OztnRUFGTzs7Ozs7O0FBRWIsTUFBTUEsYUFBYUMsZ0JBQU8sQ0FBQ0MsTUFBTTtBQUV4Q0YsV0FBV0csR0FBRyxDQUFDLEtBQUssQ0FBQ0MsS0FBS0M7SUFDeEJBLElBQUlDLE1BQU0sQ0FBQyxLQUFLQyxJQUFJLENBQUM7UUFBRUMsS0FBSztJQUFPO0FBQ3JDIn0=

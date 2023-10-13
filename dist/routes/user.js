@@ -1,22 +1,22 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */ "use strict";
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-Object.defineProperty(exports, "userRoutes", {
-    enumerable: true,
-    get: function() {
-        return userRoutes;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
     }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "express", "../controllers/userController"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.userRoutes = void 0;
+    /* eslint-disable @typescript-eslint/no-misused-promises */
+    const express_1 = __importDefault(require("express"));
+    const userController_1 = require("../controllers/userController");
+    exports.userRoutes = express_1.default.Router();
+    exports.userRoutes.get('/:id', userController_1.getUserById);
+    exports.userRoutes.post('/new', userController_1.addUser);
 });
-const _express = /*#__PURE__*/ _interop_require_default(require("express"));
-const _userController = require("../controllers/userController");
-function _interop_require_default(obj) {
-    return obj && obj.__esModule ? obj : {
-        default: obj
-    };
-}
-const userRoutes = _express.default.Router();
-userRoutes.get("/:id", _userController.getUserById);
-userRoutes.post("/new", _userController.addUser);
-
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9yb3V0ZXMvdXNlci50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvKiBlc2xpbnQtZGlzYWJsZSBAdHlwZXNjcmlwdC1lc2xpbnQvbm8tbWlzdXNlZC1wcm9taXNlcyAqL1xyXG5pbXBvcnQgZXhwcmVzcyBmcm9tICdleHByZXNzJztcclxuaW1wb3J0IHsgYWRkVXNlciwgZ2V0VXNlckJ5SWQgfSBmcm9tICcuLi9jb250cm9sbGVycy91c2VyQ29udHJvbGxlcic7XHJcblxyXG5leHBvcnQgY29uc3QgdXNlclJvdXRlcyA9IGV4cHJlc3MuUm91dGVyKCk7XHJcblxyXG51c2VyUm91dGVzLmdldCgnLzppZCcsIGdldFVzZXJCeUlkKTtcclxuXHJcbnVzZXJSb3V0ZXMucG9zdCgnL25ldycsIGFkZFVzZXIpO1xyXG4iXSwibmFtZXMiOlsidXNlclJvdXRlcyIsImV4cHJlc3MiLCJSb3V0ZXIiLCJnZXQiLCJnZXRVc2VyQnlJZCIsInBvc3QiLCJhZGRVc2VyIl0sIm1hcHBpbmdzIjoiQUFBQSx5REFBeUQ7Ozs7K0JBSTVDQTs7O2VBQUFBOzs7Z0VBSE87Z0NBQ2lCOzs7Ozs7QUFFOUIsTUFBTUEsYUFBYUMsZ0JBQU8sQ0FBQ0MsTUFBTTtBQUV4Q0YsV0FBV0csR0FBRyxDQUFDLFFBQVFDLDJCQUFXO0FBRWxDSixXQUFXSyxJQUFJLENBQUMsUUFBUUMsdUJBQU8ifQ==
