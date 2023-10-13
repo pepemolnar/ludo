@@ -17,15 +17,15 @@
         },
         {
             color: 'blue',
-            startPosition: 5
+            startPosition: 6
         },
         {
             color: 'green',
-            startPosition: 9
+            startPosition: 11
         },
         {
             color: 'yellow',
-            startPosition: 13
+            startPosition: 16
         }
     ];
 });

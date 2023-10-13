@@ -10,7 +10,7 @@ export interface Position {
   positionType: PositionType;
 }
 
-export type FieldCount = 16 | 24 | 32;
+export type FieldCount = 16 | 20 | 24 | 32;
 
 export enum PositionType {
   IN_HOUSE,
