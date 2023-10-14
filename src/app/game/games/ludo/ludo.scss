@@ -1,0 +1,194 @@
+@import "../../variables";
+
+.game{
+    display: flex;
+    padding: 40px;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+
+    .figure{
+        padding: 10px;
+        border: 1px solid #000000;
+        border-radius: 10px;
+        pointer-events: none;
+        cursor: default;
+
+        &.red-figure{
+            background-color: $player_red;
+        }
+        &.blue-figure{
+            background-color: $player_blue;
+        }
+        &.green-figure{
+            background-color: $player_green;
+        }
+        &.yellow-figure{
+            background-color: $player_yellow;
+        }
+
+        &[selectable="true"]{
+            pointer-events: all;
+            cursor: pointer;
+            box-shadow: inset 0px 0px 0px 2px #ffffff;
+            border: $basic_border;
+        }
+    }
+
+    .houses{
+        display: flex;
+        padding-bottom: 100px;
+
+        .house{
+            border: $basic_border;
+            width: 150px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            grid-gap: 5px;
+            justify-content: center;
+
+            &.red-house{
+                background-color: $player_red;
+            }
+            &.blue-house{
+                background-color: $player_blue;
+            }
+            &.green-house{
+                background-color: $player_green;
+            }
+            &.yellow-house{
+                background-color: $player_yellow;
+            }
+
+            &[active="true"]{
+                box-shadow: inset 0px 0px 0px 2px #ffffff;
+            }
+        }
+    }
+
+    .board{
+        position: relative;
+        border: $thin_border;
+
+        .field{
+            width: 60px;
+            height: 60px;
+            display: flex;
+            grid-gap: 5px;
+            align-items: center;
+            justify-content: center;
+            border: $thin_border;
+        }
+
+        .field-block{
+            display: flex;
+
+            .red-field{
+                background-color: $player_red;
+            }
+            .blue-field{
+                background-color: $player_blue;
+            }
+            .green-field{
+                background-color: $player_green;
+            }
+            .yellow-field{
+                background-color: $player_yellow;
+            }
+
+            &.upper-row-field-block{
+                .field:not(:first-child):not(:last-child){
+                    border-bottom: $basic_border;
+                }
+            }
+            &.lower-row-field-block{
+                .field:not(:first-child):not(:last-child){
+                    border-top: $basic_border;
+                }
+            }
+            &.right-column-field-block{
+                flex-direction: column;
+                align-items: flex-end;
+
+                .field{
+                    border-left: $basic_border;
+                }
+            }
+            &.left-column-field-block{
+                flex-direction: column;
+                align-items: flex-start;
+                position: absolute;
+                top: 60px;
+
+                .field{
+                    border-right: $basic_border;
+                }
+            }
+        }
+        
+        .dice-block{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: grid;
+            grid-gap: 20px;
+
+            .rolled-number{
+                font-size: 48px;
+                font-weight: 700;
+            }
+
+            .roll-button-container{
+                .roll-button{
+                    padding: 10px 40px;
+                    border: $basic_border;
+                    pointer-events: none;
+                    cursor: default;
+
+                    &:hover{
+                        background-color: #c1c1c1;
+                    }
+                    &[active="true"]{
+                        pointer-events: all;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+
+    .goal-blocks{
+        display: flex;
+        flex-direction: column;
+        grid-gap: 40px;
+        align-items: center;
+        padding-top: 60px;
+
+        .goal-block{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 20px;
+
+            .goal{
+                width: 40px;
+                height: 40px;
+                border: $basic_border;
+
+                &.red-goal{
+                    background-color: $player_red;
+                }
+                &.blue-goal{
+                    background-color: $player_blue;
+                }
+                &.green-goal{
+                    background-color: $player_green;
+                }
+                &.yellow-goal{
+                    background-color: $player_yellow;
+                }
+            }
+        }
+    }
+}

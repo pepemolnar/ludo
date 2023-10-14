@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Gameszkó</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+            <link rel="stylesheet" type="text/css" href="general.css">
+            <link rel="stylesheet" type="text/css" href="games/ludo/ludo.css">
+        </head>
+        <body>
+            <div class="container">
+                <div id="game" class="game" data-id="{{gameId}}">
+                    <div class="houses">
+                        <div id="red_house" class="house red-house">
+                            <a id="red_figure_0" class="figure red-figure" data-color="red" data-number="0"></a>
+                            <a id="red_figure_1" class="figure red-figure" data-color="red" data-number="1"></a>
+                            <a id="red_figure_2" class="figure red-figure" data-color="red" data-number="2"></a>
+                            <a id="red_figure_3" class="figure red-figure" data-color="red" data-number="3"></a>
+                        </div>
+                        <div id="blue_house" class="house blue-house">
+                            <a id="blue_figure_0" class="figure blue-figure" data-color="blue" data-number="0"></a>
+                            <a id="blue_figure_1" class="figure blue-figure" data-color="blue" data-number="1"></a>
+                            <a id="blue_figure_2" class="figure blue-figure" data-color="blue" data-number="2"></a>
+                            <a id="blue_figure_3" class="figure blue-figure" data-color="blue" data-number="3"></a>
+                        </div>
+                        <div id="green_house" class="house green-house">
+                            <a id="green_figure_0" class="figure green-figure" data-color="green" data-number="0"></a>
+                            <a id="green_figure_1" class="figure green-figure" data-color="green" data-number="1"></a>
+                            <a id="green_figure_2" class="figure green-figure" data-color="green" data-number="2"></a>
+                            <a id="green_figure_3" class="figure green-figure" data-color="green" data-number="3"></a>
+                        </div>
+                        <div id="yellow_house" class="house yellow-house">
+                            <a id="yellow_figure_0" class="figure yellow-figure" data-color="yellow" data-number="0"></a>
+                            <a id="yellow_figure_1" class="figure yellow-figure" data-color="yellow" data-number="1"></a>
+                            <a id="yellow_figure_2" class="figure yellow-figure" data-color="yellow" data-number="2"></a>
+                            <a id="yellow_figure_3" class="figure yellow-figure" data-color="yellow" data-number="3"></a>
+                        </div>
+                    </div>
+                    <div class="board">
+                        <div class="field-block upper-row-field-block">
+                            <div id="field_1" class="field red-field" data-position="1"></div>
+                            <div id="field_2" class="field" data-position="2"></div>
+                            <div id="field_3" class="field" data-position="3"></div>
+                            <div id="field_4" class="field" data-position="4"></div>
+                            <div id="field_5" class="field blue-field" data-position="5"></div>
+                        </div>
+                        <div class="field-block right-column-field-block">
+                            <div id="field_6" class="field" data-position="6"></div>
+                            <div id="field_7" class="field" data-position="7"></div>
+                            <div id="field_8" class="field" data-position="8"></div>
+                        </div>
+                        <div class="field-block lower-row-field-block">
+                            <div id="field_13" class="field yellow-field" data-position="13"></div>
+                            <div id="field_12" class="field" data-position="12"></div>
+                            <div id="field_11" class="field" data-position="11"></div>
+                            <div id="field_10" class="field" data-position="10"></div>
+                            <div id="field_9" class="field green-field" data-position="9"></div>
+                        </div>
+                        <div class="field-block left-column-field-block">
+                            <div id="field_16" class="field" data-position="16"></div>
+                            <div id="field_15" class="field" data-position="15"></div>
+                            <div id="field_14" class="field" data-position="14"></div>
+                        </div>
+                        <div class="dice-block">
+                            <div id="rolled_number" class="rolled-number">0</div>
+                            <div class="roll-button-container">
+                                <a id="roll_button" class="roll-button" active="true">Dobás</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="goal-blocks">
+                        <div id="red_goal_block" class="goal-block">
+                            <div id="red_goal_1" class="goal red-goal"></div>
+                            <div id="red_goal_2" class="goal red-goal"></div>
+                            <div id="red_goal_3" class="goal red-goal"></div>
+                            <div id="red_goal_4" class="goal red-goal"></div>
+                        </div>
+                        <div id="blue_goal_block" class="goal-block">
+                            <div id="blue_goal_1" class="goal blue-goal"></div>
+                            <div id="blue_goal_2" class="goal blue-goal"></div>
+                            <div id="blue_goal_3" class="goal blue-goal"></div>
+                            <div id="blue_goal_4" class="goal blue-goal"></div>
+                        </div>
+                        <div id="green_goal_block" class="goal-block">
+                            <div id="green_goal_1" class="goal green-goal"></div>
+                            <div id="green_goal_2" class="goal green-goal"></div>
+                            <div id="green_goal_3" class="goal green-goal"></div>
+                            <div id="green_goal_4" class="goal green-goal"></div>
+                        </div>
+                        <div id="yellow_goal_block" class="goal-block">
+                            <div id="yellow_goal_1" class="goal yellow-goal"></div>
+                            <div id="yellow_goal_2" class="goal yellow-goal"></div>
+                            <div id="yellow_goal_3" class="goal yellow-goal"></div>
+                            <div id="yellow_goal_4" class="goal yellow-goal"></div>
+                        </div>
+                    </div>
+                </div>
+            </container>
+            <script type="text/javascript" data-main="games/ludo/ludo.js" src="https://requirejs.org/docs/release/2.3.6/minified/require.js"></script>
+        </body>
+    </html>

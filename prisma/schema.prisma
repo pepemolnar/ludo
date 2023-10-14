@@ -15,16 +15,38 @@ model User {
   name   String
   age    Int
   Player Player[]
+
+  @@map("user|user")
 }
 
 model Game {
-  id        Int    @id @default(autoincrement())
-  gameId    String
+  id     Int    @id @default(autoincrement())
+  gameId String
+  type   String
+  Ludo   Ludo?
+
+  @@map("game|game")
+}
+
+model Ludo {
+  id        Int      @id @default(autoincrement())
+  gameId    Int      @unique
+  game      Game     @relation(fields: [gameId], references: [id])
   boardSize Int
+  status    String
+  Player    Player[]
+
+  @@map("game|ludo")
 }
 
 model Player {
-  id     Int  @id @default(autoincrement())
-  userId Int
-  user   User @relation(fields: [userId], references: [id])
+  id           Int    @id @default(autoincrement())
+  userId       Int
+  user         User   @relation(fields: [userId], references: [id])
+  ludoId       Int
+  ludo         Ludo   @relation(fields: [ludoId], references: [id])
+  position     Int
+  positionType String
+
+  @@map("ludo|player")
 }
