@@ -49,6 +49,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         res.setHeader('Content-Type', 'text/html');
         res.status(200).send(content);
     });
+    exports.homeRoutes.get('/24', (req, res) => {
+        const content = fs.readFileSync('src/view/home/map_24/home.html', 'utf-8');
+        res.setHeader('Content-Type', 'text/html');
+        res.status(200).send(content);
+    });
     exports.homeRoutes.get('/game-over', (req, res) => {
         const winner = String(req.query.winner);
         res.setHeader('Content-Type', 'text/html');

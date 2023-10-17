@@ -16,6 +16,12 @@ homeRoutes.get('/20', (req, res) => {
   res.status(200).send(content);
 });
 
+homeRoutes.get('/24', (req, res) => {
+  const content = fs.readFileSync('src/view/home/map_24/home.html', 'utf-8');
+  res.setHeader('Content-Type', 'text/html');
+  res.status(200).send(content);
+});
+
 homeRoutes.get('/game-over', (req: Request, res: Response) => {
   const winner = String(req.query.winner);
   res.setHeader('Content-Type', 'text/html');

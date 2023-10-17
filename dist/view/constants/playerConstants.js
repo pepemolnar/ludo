@@ -9,7 +9,7 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.PLAYERS_20 = exports.PLAYERS_16 = void 0;
+    exports.PLAYERS_24 = exports.PLAYERS_20 = exports.PLAYERS_16 = void 0;
     exports.PLAYERS_16 = [
         {
             color: 'red',
@@ -44,6 +44,24 @@
         {
             color: 'yellow',
             startPosition: 16
+        }
+    ];
+    exports.PLAYERS_24 = [
+        {
+            color: 'red',
+            startPosition: 1
+        },
+        {
+            color: 'blue',
+            startPosition: 7
+        },
+        {
+            color: 'green',
+            startPosition: 12
+        },
+        {
+            color: 'yellow',
+            startPosition: 18
         }
     ];
 });

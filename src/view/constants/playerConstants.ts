@@ -37,3 +37,22 @@ export const PLAYERS_20: PlayerInterface[] = [
     startPosition: 16
   }
 ];
+
+export const PLAYERS_24: PlayerInterface[] = [
+  {
+    color: 'red',
+    startPosition: 1
+  },
+  {
+    color: 'blue',
+    startPosition: 7
+  },
+  {
+    color: 'green',
+    startPosition: 12
+  },
+  {
+    color: 'yellow',
+    startPosition: 18
+  }
+];
