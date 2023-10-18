@@ -1,12 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
 import { CustomError } from './CustomError';
 
-export const globalErrorHandler = (
-  error: Error,
-  request: Request,
-  response: Response,
-  next: NextFunction
-): void => {
+export const globalErrorHandler = (error: Error, request: Request, response: Response, next: NextFunction): void => {
   let message = 'Something went wrong!';
   let status = 500;
 
@@ -16,5 +11,8 @@ export const globalErrorHandler = (
   }
 
   console.error(error);
-  response.status(status).send({ message });
+  response.status(status).json({
+    success: false,
+    message
+  });
 };

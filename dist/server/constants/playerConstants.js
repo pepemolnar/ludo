@@ -12,20 +12,145 @@
     exports.PLAYERS = void 0;
     exports.PLAYERS = [
         {
+            userId: 1,
             color: 'red',
-            startPosition: 1
+            active: true,
+            figures: [
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 1,
+                        positionType: 'IN_HOUSE'
+                    }
+                },
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 1,
+                        positionType: 'IN_HOUSE'
+                    }
+                },
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 1,
+                        positionType: 'IN_HOUSE'
+                    }
+                },
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 1,
+                        positionType: 'IN_HOUSE'
+                    }
+                }
+            ]
         },
         {
+            userId: 2,
             color: 'blue',
-            startPosition: 5
+            active: false,
+            figures: [
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 5,
+                        positionType: 'IN_HOUSE'
+                    }
+                },
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 5,
+                        positionType: 'IN_HOUSE'
+                    }
+                },
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 5,
+                        positionType: 'IN_HOUSE'
+                    }
+                },
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 5,
+                        positionType: 'IN_HOUSE'
+                    }
+                }
+            ]
         },
         {
+            userId: 3,
             color: 'green',
-            startPosition: 9
+            active: false,
+            figures: [
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 9,
+                        positionType: 'IN_HOUSE'
+                    }
+                },
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 9,
+                        positionType: 'IN_HOUSE'
+                    }
+                },
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 9,
+                        positionType: 'IN_HOUSE'
+                    }
+                },
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 9,
+                        positionType: 'IN_HOUSE'
+                    }
+                }
+            ]
         },
         {
+            userId: 4,
             color: 'yellow',
-            startPosition: 13
+            active: false,
+            figures: [
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 13,
+                        positionType: 'IN_HOUSE'
+                    }
+                },
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 13,
+                        positionType: 'IN_HOUSE'
+                    }
+                },
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 13,
+                        positionType: 'IN_HOUSE'
+                    }
+                },
+                {
+                    position: 0,
+                    config: {
+                        stepOutPosition: 13,
+                        positionType: 'IN_HOUSE'
+                    }
+                }
+            ]
         }
     ];
 });
+//# sourceMappingURL=playerConstants.js.map

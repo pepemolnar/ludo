@@ -1,12 +1,21 @@
-export interface IPlayer {
-  color: TPlayerColor;
-  startPosition: number;
+import { ICreateFigure, ICreateLudoFigure } from '../../tpyes/figureTypes';
+import { TSelectableColors } from '../../tpyes/playerTypes';
+import { LudoFigure } from '../business/figure/LudoFigure';
+
+export interface ICreatePlayer {
+  userId: number;
+  active: boolean;
+  color: TSelectableColors;
+  figures?: ICreateFigure[];
 }
 
-export type TPlayerColor =
-  | 'red'
-  | 'blue'
-  | 'green'
-  | 'yellow'
-  | 'orange'
-  | 'purple';
+export interface ILudoPlayer {
+  id: number;
+  active: boolean;
+  color: TSelectableColors;
+  figures: LudoFigure[];
+}
+
+export interface ICreateLudoPlayer extends ICreatePlayer {
+  figures: ICreateLudoFigure[];
+}

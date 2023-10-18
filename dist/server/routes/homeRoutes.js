@@ -50,3 +50,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         res.status(200).send(`<h1>Winner is ${winner}</h1>`);
     });
 });
+//# sourceMappingURL=homeRoutes.js.map

@@ -1,32 +1,33 @@
-import { ISelectableFigure } from './figureTypes';
-import { IPlayer } from './playerTypes';
+import { Prisma } from '@prisma/client';
+import { ILudoPlayer, ICreateLudoPlayer, ICreatePlayer } from './playerTypes';
+import { TPositionType, TFieldCount, TStepOutField } from '../../tpyes/ludoTypes';
+import { TGameType } from '../../tpyes/gameTypes';
 
-export interface IGame {
-  players: IPlayer[];
+export interface ICreateGame {
+  hash: string;
+  type: TGameType;
+  config: Prisma.InputJsonValue;
+  playerConfigs: ICreatePlayer[];
+}
+
+export interface ILudo {
+  players: ILudoPlayer[];
   numberOfFields: TFieldCount;
+}
+
+export interface ICreateLudo extends ICreateGame {
+  playerConfigs: ICreateLudoPlayer[];
+  config: {
+    numberOfFields: TFieldCount;
+  };
 }
 
 export interface IPosition {
   position: number;
-  positionType: PositionType;
+  positionType: TPositionType;
 }
 
-export type TFieldCount = 16 | 24 | 32;
-
-export enum PositionType {
-  IN_HOUSE,
-  IN_GAME,
-  IN_GOAL
-}
-
-export interface IRollDiceResponse {
-  success: boolean;
-  message: string;
-  data: IRollDiceResponseData;
-}
-
-interface IRollDiceResponseData {
-  rolledNumber: number;
-  isRoundOver: boolean;
-  selectableFigures: ISelectableFigure[];
+export interface IGameDBConfig {
+  numberOfFields: TFieldCount;
+  stepOutFields: TStepOutField;
 }

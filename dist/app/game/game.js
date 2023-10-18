@@ -13,3 +13,4 @@ window.onload = (event) => {
         }
     };
 };
+//# sourceMappingURL=game.js.map

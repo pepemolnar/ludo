@@ -21,6 +21,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -40,32 +49,42 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     const gameController_1 = require("../controllers/gameController");
     const fs = __importStar(require("fs"));
     exports.gameRoutes = express_1.default.Router();
-    exports.gameRoutes.get('/', (req, res) => {
-        console.log('asfd');
+    exports.gameRoutes.get('/', (_req, res) => {
         const content = fs.readFileSync('src/app/game/game.html', 'utf-8');
         res.setHeader('Content-Type', 'text/html');
         res.status(200).send(content);
     });
-    exports.gameRoutes.get('/new', (req, res) => {
-        const gameId = (0, gameController_1.createGame)();
+    exports.gameRoutes.get('/new', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const gameId = yield (0, gameController_1.createGame)();
+        res.setHeader('Content-Type', 'application/json');
         res.status(200).json({ gameId });
-        // const gameStatus = getGameStatus(gameID);
-    });
-    exports.gameRoutes.get('/:gameId', (req, res) => {
-        const gameId = req.params.gameId;
+    }));
+    exports.gameRoutes.get('/:hash/roll', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const hash = req.params.hash;
+        const response = yield (0, gameController_1.rollTheDice)(hash);
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(response);
+    }));
+    exports.gameRoutes.post('/:hash/step', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const hash = req.params.hash;
+        const { figureId } = req.body;
+        const respone = yield (0, gameController_1.stepWithFigure)(hash, figureId);
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(respone);
+    }));
+    exports.gameRoutes.get('/:hash/status', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const hash = req.params.hash;
+        const status = yield (0, gameController_1.getGameStatus)(hash);
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(status);
+    }));
+    exports.gameRoutes.get('/:hash', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const hash = req.params.hash;
+        yield (0, gameController_1.getGameStatus)(hash);
         let content = fs.readFileSync('dist/app/game/games/ludo/ludo.html', 'utf-8');
-        content = content.replace('{{gameId}}', gameId);
+        content = content.replace('{{hash}}', hash);
         res.setHeader('Content-Type', 'text/html');
         res.status(200).send(content);
-    });
-    exports.gameRoutes.get('/:gameId/roll', (req, res) => {
-        const response = (0, gameController_1.rollTheDice)();
-        res.setHeader('Content-Type', 'text/html');
-        res.status(200).json(response);
-    });
-    exports.gameRoutes.post('/:gameId/step', (req, res) => {
-        const winner = String(req.query.gameID);
-        res.setHeader('Content-Type', 'text/html');
-        res.status(200).send(`<h1>Winner is ${winner}</h1>`);
-    });
+    }));
 });
+//# sourceMappingURL=gameRoutes.js.map

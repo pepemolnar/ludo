@@ -1,13 +1,19 @@
-import { TPlayerColor } from './playerTypes';
+import { TPositionType } from '../../tpyes/ludoTypes';
+import { TSelectableColors } from '../../tpyes/playerTypes';
 
-export interface IFigure {
+export interface ILudoFigure {
   id: number;
   position: number;
-  color: TPlayerColor;
+  positionType: TPositionType;
+  stepOutPosition: number;
+}
+
+export interface ILudoFigureDBConfig {
+  positionType: TPositionType;
   stepOutPosition: number;
 }
 
 export interface ISelectableFigure {
   id: number;
-  playerColor: TPlayerColor;
+  playerColor: TSelectableColors;
 }

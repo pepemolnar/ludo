@@ -11,14 +11,19 @@
     },
     "rules": {
         "semi": "off",
+        "no-unused-vars": "warn",
+        "no-return-await": "off",
+
         "@typescript-eslint/semi": "off",
         "@typescript-eslint/no-var-requires": "off",
-        "no-unused-vars": "warn",
         "@typescript-eslint/no-unused-vars": "warn",
-        "@typescript-eslint/no-misused-promises": "warn",
+        "@typescript-eslint/no-misused-promises": "off",
         "@typescript-eslint/space-before-function-paren": "off",
         "@typescript-eslint/strict-boolean-expressions": "off",
         "@typescript-eslint/consistent-type-imports": "off",
-        "@typescript-eslint/member-delimiter-style": "off"
+        "@typescript-eslint/member-delimiter-style": "off",
+        "@typescript-eslint/no-floating-promises": "warn",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/consistent-indexed-object-style": "off"
     }
 }

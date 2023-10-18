@@ -1,4 +1,7 @@
+import { TPositionType } from '../../../tpyes/ludoTypes';
+
 export interface IFigure {
   id: number;
-  playerColor: string;
+  position: number;
+  positionType: TPositionType;
 }

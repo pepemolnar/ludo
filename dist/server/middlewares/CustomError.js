@@ -20,3 +20,4 @@
     }
     exports.CustomError = CustomError;
 });
+//# sourceMappingURL=CustomError.js.map

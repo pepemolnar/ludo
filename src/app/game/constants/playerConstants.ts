@@ -1,31 +1,4 @@
-import { IPlayer, IPlayerColor } from '../types/playerTypes';
-
-export const PLAYERS: IPlayer[] = [
-  {
-    color: {
-      name: 'red',
-      hex: '#d80000'
-    }
-  },
-  {
-    color: {
-      name: 'blue',
-      hex: '#201cff'
-    }
-  },
-  {
-    color: {
-      name: 'green',
-      hex: '#19d400'
-    }
-  },
-  {
-    color: {
-      name: 'yellow',
-      hex: '#fff831'
-    }
-  }
-];
+import { IPlayerColor } from '../types/playerTypes';
 
 export const PLAYER_COLORS: IPlayerColor[] = [
   {

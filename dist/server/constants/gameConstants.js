@@ -12,7 +12,12 @@
     exports.GAME_CONFIG = void 0;
     const playerConstants_1 = require("./playerConstants");
     exports.GAME_CONFIG = {
-        players: playerConstants_1.PLAYERS,
-        numberOfFields: 16
+        hash: '52029830-b125-4f3f-8e54-d61e26fdf068',
+        type: 'ludo',
+        playerConfigs: playerConstants_1.PLAYERS,
+        config: {
+            numberOfFields: 16
+        }
     };
 });
+//# sourceMappingURL=gameConstants.js.map

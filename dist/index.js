@@ -31,3 +31,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         console.log(`Server is running on port ${port}`);
     });
 });
+//# sourceMappingURL=index.js.map

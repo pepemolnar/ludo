@@ -20,33 +20,45 @@ model User {
 }
 
 model Game {
-  id     Int    @id @default(autoincrement())
-  gameId String
+  id     Int      @id @default(autoincrement())
+  hash   String
   type   String
-  Ludo   Ludo?
+  config Json
+  Player Player[]
+  Action Action[]
 
   @@map("game|game")
 }
 
-model Ludo {
-  id        Int      @id @default(autoincrement())
-  gameId    Int      @unique
-  game      Game     @relation(fields: [gameId], references: [id])
-  boardSize Int
-  status    String
-  Player    Player[]
+model Player {
+  id     Int      @id @default(autoincrement())
+  userId Int
+  user   User     @relation(fields: [userId], references: [id])
+  gameId Int
+  game   Game     @relation(fields: [gameId], references: [id])
+  color  String
+  active Boolean
+  Figure Figure[]
 
-  @@map("game|ludo")
+  @@map("game|player")
 }
 
-model Player {
-  id           Int    @id @default(autoincrement())
-  userId       Int
-  user         User   @relation(fields: [userId], references: [id])
-  ludoId       Int
-  ludo         Ludo   @relation(fields: [ludoId], references: [id])
-  position     Int
-  positionType String
+model Figure {
+  id       Int    @id @default(autoincrement())
+  playerId Int
+  player   Player @relation(fields: [playerId], references: [id])
+  position Int
+  config   Json
 
-  @@map("ludo|player")
+  @@map("game|figure")
+}
+
+model Action {
+  id     Int    @id @default(autoincrement())
+  gameId Int
+  game   Game   @relation(fields: [gameId], references: [id])
+  action String
+  info   Json
+
+  @@map("game|action")
 }

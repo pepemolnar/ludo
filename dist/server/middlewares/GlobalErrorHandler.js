@@ -19,7 +19,11 @@
             status = error.statusCode;
         }
         console.error(error);
-        response.status(status).send({ message });
+        response.status(status).json({
+            success: false,
+            message
+        });
     };
     exports.globalErrorHandler = globalErrorHandler;
 });
+//# sourceMappingURL=GlobalErrorHandler.js.map

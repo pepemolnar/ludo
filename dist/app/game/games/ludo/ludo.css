@@ -86,26 +86,29 @@
 .game .board .field-block .yellow-field {
   background-color: #fff831;
 }
-.game .board .field-block.upper-row-field-block .field:not(:first-child):not(:last-child) {
+.game .board .field-block:nth-child(1) .field:not(:first-child):not(:last-child) {
   border-bottom: 2px solid #000000;
 }
-.game .board .field-block.lower-row-field-block .field:not(:first-child):not(:last-child) {
-  border-top: 2px solid #000000;
-}
-.game .board .field-block.right-column-field-block {
+.game .board .field-block:nth-child(2) {
   flex-direction: column;
   align-items: flex-end;
 }
-.game .board .field-block.right-column-field-block .field {
+.game .board .field-block:nth-child(2) .field {
   border-left: 2px solid #000000;
 }
-.game .board .field-block.left-column-field-block {
-  flex-direction: column;
+.game .board .field-block:nth-child(3) {
+  flex-direction: row-reverse;
+}
+.game .board .field-block:nth-child(3) .field:not(:first-child):not(:last-child) {
+  border-top: 2px solid #000000;
+}
+.game .board .field-block:nth-child(4) {
+  flex-direction: column-reverse;
   align-items: flex-start;
   position: absolute;
   top: 60px;
 }
-.game .board .field-block.left-column-field-block .field {
+.game .board .field-block:nth-child(4) .field {
   border-right: 2px solid #000000;
 }
 .game .board .dice-block {
@@ -133,32 +136,32 @@
   pointer-events: all;
   cursor: pointer;
 }
-.game .goal-blocks {
+.game .goals {
   display: flex;
   flex-direction: column;
   grid-gap: 40px;
   align-items: center;
   padding-top: 60px;
 }
-.game .goal-blocks .goal-block {
+.game .goals .goal-block {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
 }
-.game .goal-blocks .goal-block .goal {
+.game .goals .goal-block .goal {
   width: 40px;
   height: 40px;
   border: 2px solid #000000;
 }
-.game .goal-blocks .goal-block .goal.red-goal {
+.game .goals .goal-block .goal.red-goal {
   background-color: #d80000;
 }
-.game .goal-blocks .goal-block .goal.blue-goal {
+.game .goals .goal-block .goal.blue-goal {
   background-color: #201cff;
 }
-.game .goal-blocks .goal-block .goal.green-goal {
+.game .goals .goal-block .goal.green-goal {
   background-color: #19d400;
 }
-.game .goal-blocks .goal-block .goal.yellow-goal {
+.game .goals .goal-block .goal.yellow-goal {
   background-color: #fff831;
-}/*# sourceMappingURL=ludo_16.css.map */
+}/*# sourceMappingURL=ludo.css.map */

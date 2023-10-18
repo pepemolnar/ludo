@@ -1,8 +1,10 @@
+import { TSelectableColors } from '../../../tpyes/playerTypes';
+
 export interface IPlayer {
-  color: IPlayerColor;
+  color: TSelectableColors;
 }
 
 export interface IPlayerColor {
-  name: string;
+  name: TSelectableColors;
   hex: string;
 }

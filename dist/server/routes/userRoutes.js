@@ -20,3 +20,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     exports.userRoutes.get('/:id', userController_1.getUserById);
     exports.userRoutes.post('/new', userController_1.addUser);
 });
+//# sourceMappingURL=userRoutes.js.map

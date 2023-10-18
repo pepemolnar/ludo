@@ -23,3 +23,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     exports.routes.use('/user', userRoutes_1.userRoutes);
     exports.routes.use('/game', gameRoutes_1.gameRoutes);
 });
+//# sourceMappingURL=routes.js.map
