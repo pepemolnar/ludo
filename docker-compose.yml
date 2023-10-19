@@ -17,8 +17,11 @@ services:
       DATABASE_URL: postgresql://postgres@postgres/games_app
   postgres:
     image: postgres:15-alpine
+    restart: always
     ports:
-      - 5432:5432  # enables connecting locally via psql
+      - 5432:5432
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: games_app
       POSTGRES_HOST_AUTH_METHOD: trust

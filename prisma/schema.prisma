@@ -11,7 +11,54 @@ datasource db {
 }
 
 model User {
-  id   Int    @id @default(autoincrement())
-  name String
-  age  Int
+  id     Int      @id @default(autoincrement())
+  name   String
+  age    Int
+  Player Player[]
+
+  @@map("user|user")
+}
+
+model Game {
+  id     Int      @id @default(autoincrement())
+  hash   String
+  type   String
+  config Json
+  Player Player[]
+  Action Action[]
+
+  @@map("game|game")
+}
+
+model Player {
+  id     Int      @id @default(autoincrement())
+  userId Int
+  user   User     @relation(fields: [userId], references: [id])
+  gameId Int
+  game   Game     @relation(fields: [gameId], references: [id])
+  color  String
+  active Boolean
+  Figure Figure[]
+
+  @@map("game|player")
+}
+
+model Figure {
+  id       Int    @id @default(autoincrement())
+  playerId Int
+  player   Player @relation(fields: [playerId], references: [id])
+  position Int
+  config   Json
+
+  @@map("game|figure")
+}
+
+model Action {
+  id     Int    @id @default(autoincrement())
+  gameId Int
+  game   Game   @relation(fields: [gameId], references: [id])
+  action String
+  info   Json
+
+  @@map("game|action")
 }

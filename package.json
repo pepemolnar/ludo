@@ -3,13 +3,15 @@
     "@prisma/client": "^5.4.1",
     "@types/body-parser": "^1.19.3",
     "@types/lodash": "^4.14.199",
+    "@types/uuid": "^9.0.5",
     "body-parser": "^1.20.2",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",
     "pnpm": "^8.8.0",
-    "pnpx": "^0.0.1"
+    "pnpx": "^0.0.1",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.2",
@@ -31,7 +33,7 @@
     "typescript": "^5.2.2"
   },
   "scripts": {
-    "build": "rimraf dist/ && tsc && copyfiles -u 1 \"src/**/*.html\" \"src/**/*.css\" dist/",
+    "build": "rimraf dist/ && tsc && copyfiles -u 1 \"src/**/*.html\" \"src/**/*.css\" \"src/**/*.css.map\" dist/",
     "start": "node dist/index.js",
     "local": "npx nodemon src/index.ts",
     "dev": "pnpm build && node --inspect=0.0.0.0 dist/index.js"

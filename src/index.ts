@@ -2,8 +2,8 @@ import 'express-async-errors';
 import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
-import { routes } from './routes/routes';
-import { globalErrorHandler } from './middlewares/GlobalErrorHandler';
+import { routes } from './server/routes/routes';
+import { globalErrorHandler } from './server/middlewares/GlobalErrorHandler';
 
 const port = process.env.PORT ?? 3000;
 const ip = process.env.IP ?? '127.0.0.1';
