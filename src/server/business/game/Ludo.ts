@@ -1,4 +1,4 @@
-import { ILudo, IGameDBConfig, IPosition } from '../../types/gameTypes';
+import { IGameDBConfig } from '../../types/gameTypes';
 import { LudoPlayer } from '../player/LudoPlayer';
 import { CustomError } from '../../middlewares/CustomError';
 import { GameBusiness } from './GameBusiness';
@@ -11,6 +11,8 @@ import {
   TStepOutField
 } from '../../../tpyes/ludoTypes';
 import { ILudoPlayerStatus } from '../../../tpyes/playerTypes';
+import { ILudo } from '../../types/ludoTypes';
+import { IPosition } from '../../types/figureTypes';
 
 export class Ludo implements ILudo {
   id!: number;

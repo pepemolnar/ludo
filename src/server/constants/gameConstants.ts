@@ -1,4 +1,4 @@
-import { ICreateLudo } from '../types/gameTypes';
+import { ICreateLudo } from '../types/ludoTypes';
 import { PLAYERS } from './playerConstants';
 
 export const GAME_CONFIG: ICreateLudo = {

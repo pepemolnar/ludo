@@ -1,3 +1,4 @@
+import { IStatusResponse, IStatusResponseData } from '../server/types/gameTypes';
 import { IResponse } from './generalTypes';
 import { ILudoPlayerStatus, TSelectableColors } from './playerTypes';
 
@@ -26,11 +27,11 @@ export interface IStepResponseData {
   opponentFigureIdsHitByPlayer: number[];
 }
 
-export interface ILudoStatusResponse extends IResponse {
+export interface ILudoStatusResponse extends IStatusResponse {
   data: ILudoStatusResponseData;
 }
 
-export interface ILudoStatusResponseData {
+export interface ILudoStatusResponseData extends IStatusResponseData {
   numberOfFields: number;
   stepOutFields: TStepOutField;
   players: ILudoPlayerStatus[];

@@ -1,4 +1,4 @@
-import { ICreateLudoPlayer } from '../types/playerTypes';
+import { ICreateLudoPlayer } from '../types/ludoTypes';
 
 export const PLAYERS: ICreateLudoPlayer[] = [
   {

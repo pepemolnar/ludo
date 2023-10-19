@@ -1,26 +1,23 @@
-import { IPosition } from '../../types/gameTypes';
+import { Player as PrismaPlayer } from '@prisma/client';
 import { LudoFigure } from '../figure/LudoFigure';
-import { Player } from '@prisma/client';
 import { PlayerBusiness } from './PlayerBusiness';
 import { FigureBusiness } from '../figure/FigureBusiness';
-import { ILudoPlayer } from '../../types/playerTypes';
 import { ILudoPlayerStatus, TSelectableColors } from '../../../tpyes/playerTypes';
 import { ILudoFigureStatus } from '../../../tpyes/figureTypes';
 import { CustomError } from '../../middlewares/CustomError';
+import { Player } from './Player';
+import { ILudoPlayer } from '../../types/ludoTypes';
+import { IPosition } from '../../types/figureTypes';
 
-export class LudoPlayer implements ILudoPlayer {
-  id!: number;
-  active!: boolean;
-  color!: TSelectableColors;
+export class LudoPlayer extends Player implements ILudoPlayer {
   figures: LudoFigure[];
-  playerBusiness: PlayerBusiness;
 
   constructor(playerBusiness: PlayerBusiness) {
+    super(playerBusiness);
     this.figures = [];
-    this.playerBusiness = playerBusiness;
   }
 
-  public async build(player: Player) {
+  public async build(player: PrismaPlayer) {
     this.id = player.id;
     this.active = player.active;
     this.color = player.color as TSelectableColors;

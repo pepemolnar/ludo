@@ -1,22 +1,16 @@
-import { Figure } from '@prisma/client';
-import { ILudoFigure, ILudoFigureDBConfig } from '../../types/figureTypes';
-import { IPosition } from '../../types/gameTypes';
-import { FigureBusiness } from './FigureBusiness';
+import { Figure as PrismaFigure } from '@prisma/client';
+import { ILudoFigure, ILudoFigureDBConfig, IPosition } from '../../types/figureTypes';
 import { TPositionType } from '../../../tpyes/ludoTypes';
 import { ILudoFigureStatus } from '../../../tpyes/figureTypes';
+import { Figure } from './Figure';
 
-export class LudoFigure implements ILudoFigure {
+export class LudoFigure extends Figure implements ILudoFigure {
   id!: number;
   position!: number;
   positionType!: TPositionType;
   stepOutPosition!: number;
-  figureBusiness: FigureBusiness;
 
-  constructor(figureBusiness: FigureBusiness) {
-    this.figureBusiness = figureBusiness;
-  }
-
-  public async build(figure: Figure) {
+  public async build(figure: PrismaFigure) {
     const config = figure.config as unknown as ILudoFigureDBConfig;
     this.id = figure.id;
     this.position = figure.position;
@@ -78,6 +72,13 @@ export class LudoFigure implements ILudoFigure {
     return newPosition;
   }
 
+  public async stepBackToHouse(): Promise<PrismaFigure> {
+    this.position = 0;
+    this.positionType = 'IN_HOUSE';
+
+    return await this.moveFigureToCurrentPositionInDB();
+  }
+
   private isFigureStepsOverTheGoals(rolledNumber: number): boolean {
     if (this.positionType === 'IN_GOAL') {
       return this.position + rolledNumber > 4;
@@ -87,13 +88,6 @@ export class LudoFigure implements ILudoFigure {
     }
 
     return false;
-  }
-
-  public async stepBackToHouse(): Promise<Figure> {
-    this.position = 0;
-    this.positionType = 'IN_HOUSE';
-
-    return await this.moveFigureToCurrentPositionInDB();
   }
 
   private async moveFigureToCurrentPositionInDB() {
