@@ -2,8 +2,8 @@ import { Prisma } from '@prisma/client';
 import { ICreatePlayer } from './playerTypes';
 import { TFieldCount, TStepOutField } from '../../tpyes/ludoTypes';
 import { TGameType } from '../../tpyes/gameTypes';
-import { Player } from '../business/player/Player';
-import { GameBusiness } from '../business/game/GameBusiness';
+import { Player } from '../games/Player';
+import { GameBusiness } from '../games/GameBusiness';
 import { IResponse } from '../../tpyes/generalTypes';
 import { IPlayerStatus } from '../../tpyes/playerTypes';
 

@@ -1,7 +1,7 @@
 import { Figure as PrismaFigure } from '@prisma/client';
-import { IFigureStatus } from '../../../tpyes/figureTypes';
-import { IFigure } from '../../types/figureTypes';
-import { FigureBusiness } from './FigureBusiness';
+import { IFigureStatus } from '../../tpyes/figureTypes';
+import { IFigure } from '../types/figureTypes';
+import { FigureBusiness } from '../business/figure/FigureBusiness';
 
 export abstract class Figure implements IFigure {
   id!: number;

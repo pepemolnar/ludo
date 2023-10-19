@@ -1,11 +1,11 @@
 import { Player as PrismaPlayer } from '@prisma/client';
-import { LudoFigure } from '../figure/LudoFigure';
-import { PlayerBusiness } from './PlayerBusiness';
-import { FigureBusiness } from '../figure/FigureBusiness';
+import { LudoFigure } from './LudoFigure';
+import { PlayerBusiness } from '../../business/player/PlayerBusiness';
+import { FigureBusiness } from '../../business/figure/FigureBusiness';
 import { ILudoPlayerStatus, TSelectableColors } from '../../../tpyes/playerTypes';
 import { ILudoFigureStatus } from '../../../tpyes/figureTypes';
 import { CustomError } from '../../middlewares/CustomError';
-import { Player } from './Player';
+import { Player } from '../Player';
 import { ILudoPlayer } from '../../types/ludoTypes';
 import { IPosition } from '../../types/figureTypes';
 

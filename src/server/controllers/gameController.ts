@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Ludo } from '../business/game/Ludo';
+import { Ludo } from '../games/ludo/Ludo';
 import { PLAYERS } from '../constants/playerConstants';
-import { GameBusiness } from '../business/game/GameBusiness';
+import { GameBusiness } from '../games/GameBusiness';
 import { ILudoStatusResponse, IRollDiceResponse, IStepResponse } from '../../tpyes/ludoTypes';
 
 export const createGame = async (): Promise<string> => {

@@ -1,7 +1,7 @@
 import { IGame, IStatusResponseData } from '../../types/gameTypes';
 import { IPlayer } from '../../types/playerTypes';
-import { Player } from '../player/Player';
-import { GameBusiness } from './GameBusiness';
+import { Player } from '../../games/Player';
+import { GameBusiness } from '../../games/GameBusiness';
 
 export abstract class Game implements IGame {
   id!: number;

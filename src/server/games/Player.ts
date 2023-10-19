@@ -1,7 +1,7 @@
 import { Player as PrismaPlayer } from '@prisma/client';
-import { IPlayerStatus, TSelectableColors } from '../../../tpyes/playerTypes';
-import { PlayerBusiness } from './PlayerBusiness';
-import { IPlayer } from '../../types/playerTypes';
+import { IPlayerStatus, TSelectableColors } from '../../tpyes/playerTypes';
+import { PlayerBusiness } from '../business/player/PlayerBusiness';
+import { IPlayer } from '../types/playerTypes';
 
 export abstract class Player implements IPlayer {
   id!: number;

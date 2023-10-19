@@ -1,9 +1,9 @@
-import { CustomError } from '../../middlewares/CustomError';
-import { GameModel } from '../../models/GameModel';
-import { IRollInfo } from '../../types/actionTypes';
-import { ICreateGame } from '../../types/gameTypes';
-import { ActionBusiness } from '../action/ActionBusiness';
-import { PlayerBusiness } from '../player/PlayerBusiness';
+import { CustomError } from '../middlewares/CustomError';
+import { GameModel } from '../models/GameModel';
+import { IRollInfo } from '../types/actionTypes';
+import { ICreateGame } from '../types/gameTypes';
+import { ActionBusiness } from '../business/action/ActionBusiness';
+import { PlayerBusiness } from '../business/player/PlayerBusiness';
 
 export class GameBusiness extends GameModel {
   public async getPlayersOfGame(gameId: number) {

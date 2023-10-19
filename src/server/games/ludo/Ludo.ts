@@ -1,8 +1,8 @@
 import { IGameDBConfig } from '../../types/gameTypes';
-import { LudoPlayer } from '../player/LudoPlayer';
+import { LudoPlayer } from './LudoPlayer';
 import { CustomError } from '../../middlewares/CustomError';
-import { GameBusiness } from './GameBusiness';
-import { PlayerBusiness } from '../player/PlayerBusiness';
+import { GameBusiness } from '../GameBusiness';
+import { PlayerBusiness } from '../../business/player/PlayerBusiness';
 import {
   ILudoStatusResponseData,
   IRollDiceResponseData,

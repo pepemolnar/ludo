@@ -1,7 +1,7 @@
 import { ICreateLudoFigure } from '../../tpyes/figureTypes';
 import { TFieldCount } from '../../tpyes/ludoTypes';
 import { TSelectableColors } from '../../tpyes/playerTypes';
-import { LudoFigure } from '../business/figure/LudoFigure';
+import { LudoFigure } from '../games/ludo/LudoFigure';
 import { ICreateGame } from './gameTypes';
 import { ICreatePlayer } from './playerTypes';
 
