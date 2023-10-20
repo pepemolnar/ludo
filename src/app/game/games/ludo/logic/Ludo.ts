@@ -1,10 +1,10 @@
 import {
   ILudoStatusResponseData,
-  IRollDiceResponse,
-  IStepResponse,
-  IStepResponseData
+  ILudoMoveResponseData,
+  ILudoPlayerStatus,
+  ILudoMoveResponse,
+  ILudoRollDiceResponse
 } from '../../../../../tpyes/ludoTypes';
-import { ILudoPlayerStatus } from '../../../../../tpyes/playerTypes';
 import { Player } from './Player';
 
 export class Ludo {
@@ -77,7 +77,7 @@ export class Ludo {
 
     xhr.onload = () => {
       if (xhr.readyState === 4 && xhr.status === 200) {
-        const response: IRollDiceResponse = JSON.parse(xhr.response);
+        const response: ILudoRollDiceResponse = JSON.parse(xhr.response);
 
         if (response.success) {
           const data = response.data;
@@ -100,14 +100,15 @@ export class Ludo {
   }
 
   private selectFigureToMove(figureId: number): void {
+    const playerId = 1;
     const xhr = new XMLHttpRequest();
     xhr.open('POST', `/game/${this.hash}/step`, true);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xhr.send(JSON.stringify({ figureId }));
+    xhr.send(JSON.stringify({ playerId, figureId }));
 
     xhr.onload = () => {
       if (xhr.readyState === 4 && xhr.status === 200) {
-        const response: IStepResponse = JSON.parse(xhr.response);
+        const response: ILudoMoveResponse = JSON.parse(xhr.response);
 
         if (response.success) {
           this.handleStepResponse(response.data);
@@ -121,7 +122,7 @@ export class Ludo {
     };
   }
 
-  private handleStepResponse(data: IStepResponseData) {
+  private handleStepResponse(data: ILudoMoveResponseData) {
     const activePlayer = this.getPlayer(data.activePlayerId);
 
     activePlayer?.moveFigure(data.figureIdToMove, data.newPosition, data.positionType);

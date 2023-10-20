@@ -1,8 +1,8 @@
 import { Figure as PrismaFigure } from '@prisma/client';
-import { ILudoFigure, ILudoFigureDBConfig, IPosition } from '../../types/figureTypes';
-import { TPositionType } from '../../../tpyes/ludoTypes';
-import { ILudoFigureStatus } from '../../../tpyes/figureTypes';
+import { IPosition } from '../../types/figureTypes';
+import { ILudoFigureStatus, TPositionType } from '../../../tpyes/ludoTypes';
 import { Figure } from '../Figure';
+import { ILudoFigure, ILudoFigureDBConfig } from '../../types/ludoTypes';
 
 export class LudoFigure extends Figure implements ILudoFigure {
   id!: number;

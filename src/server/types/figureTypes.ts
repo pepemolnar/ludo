@@ -8,18 +8,6 @@ export interface IFigure {
   figureBusiness: FigureBusiness;
 }
 
-export interface ILudoFigure extends IFigure {
-  id: number;
-  position: number;
-  positionType: TPositionType;
-  stepOutPosition: number;
-}
-
-export interface ILudoFigureDBConfig {
-  positionType: TPositionType;
-  stepOutPosition: number;
-}
-
 export interface ISelectableFigure {
   id: number;
   playerColor: TSelectableColors;

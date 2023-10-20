@@ -86,10 +86,11 @@
             };
         }
         selectFigureToMove(figureId) {
+            const playerId = 1;
             const xhr = new XMLHttpRequest();
             xhr.open('POST', `/game/${this.hash}/step`, true);
             xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-            xhr.send(JSON.stringify({ figureId }));
+            xhr.send(JSON.stringify({ playerId, figureId }));
             xhr.onload = () => {
                 var _a;
                 if (xhr.readyState === 4 && xhr.status === 200) {
