@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { ICreateGame, IStatusResponse } from '../types/gameTypes';
 import { IMoveConfig, IMoveResponse, IRollDiceResponse } from '../../tpyes/gameTypes';
 import { GameBusiness } from '../business/game/GameBusiness';
@@ -22,11 +21,7 @@ export class GameController {
   }
 
   public async createGame(config: ICreateGame) {
-    const hash = uuidv4();
-
-    await this.gameBusiness.createGame(hash, config);
-
-    return hash;
+    return await this.gameBusiness.createGame(config);
   }
 
   public getGameStatus = async (hash: string): Promise<IStatusResponse> => {

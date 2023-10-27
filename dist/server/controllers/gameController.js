@@ -13,13 +13,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "uuid", "../business/game/GameBusiness", "../middlewares/CustomError", "../games/ludo/Ludo", "../games/monopoly/Monopoly"], factory);
+        define(["require", "exports", "../business/game/GameBusiness", "../middlewares/CustomError", "../games/ludo/Ludo", "../games/monopoly/Monopoly"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.GameController = void 0;
-    const uuid_1 = require("uuid");
     const GameBusiness_1 = require("../business/game/GameBusiness");
     const CustomError_1 = require("../middlewares/CustomError");
     const Ludo_1 = require("../games/ludo/Ludo");
@@ -62,9 +61,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         }
         createGame(config) {
             return __awaiter(this, void 0, void 0, function* () {
-                const hash = (0, uuid_1.v4)();
-                yield this.gameBusiness.createGame(hash, config);
-                return hash;
+                return yield this.gameBusiness.createGame(config);
             });
         }
         buildGame(hash) {

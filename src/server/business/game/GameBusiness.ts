@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { CustomError } from '../../middlewares/CustomError';
 import { GameModel } from '../../models/GameModel';
 import { IRollInfo } from '../../types/actionTypes';
@@ -17,7 +18,9 @@ export class GameBusiness extends GameModel {
     return await playerBusiness.getPlayersByGameId(gameId);
   }
 
-  public async createGame(hash: string, config: ICreateGame) {
+  public async createGame(config: ICreateGame) {
+    const hash = uuidv4();
+
     const game = await this.create({
       hash,
       type: config.type,
@@ -28,6 +31,8 @@ export class GameBusiness extends GameModel {
     const players = await playerBusiness.createPlayers(game.id, config.playerConfigs);
 
     await playerBusiness.setPlayerActivity(players[0].id, true);
+
+    return hash;
   }
 
   public async createRollDiceAction(gameId: number, rolledNumber: number) {
