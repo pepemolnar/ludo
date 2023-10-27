@@ -1,8 +1,7 @@
 import type { Request, Response } from 'express';
 import express from 'express';
 import * as fs from 'fs';
-import { GameController } from '../controllers/GameController';
-import { DUMMY_CREATE_LUDO_CONFIG } from '../constants/gameConstants';
+import { GameController } from '../controllers/gameController';
 
 export const gameRoutes = express.Router();
 
@@ -14,9 +13,9 @@ gameRoutes.get('/', (_req: Request, res: Response) => {
   res.status(200).send(content);
 });
 
-gameRoutes.get('/new', async (req: Request, res: Response) => {
+gameRoutes.post('/new', async (req: Request, res: Response) => {
   const gameConfig = req.body.config;
-  const gameId = await gameController.createGame(gameConfig ?? DUMMY_CREATE_LUDO_CONFIG);
+  const gameId = await gameController.createGame(gameConfig);
 
   res.setHeader('Content-Type', 'application/json');
   res.status(200).json({ gameId });
