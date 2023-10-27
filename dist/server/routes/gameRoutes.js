@@ -39,48 +39,50 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "express", "../controllers/gameController", "fs"], factory);
+        define(["require", "exports", "express", "fs", "../controllers/GameController", "../constants/gameConstants"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.gameRoutes = void 0;
     const express_1 = __importDefault(require("express"));
-    const gameController_1 = require("../controllers/gameController");
     const fs = __importStar(require("fs"));
+    const GameController_1 = require("../controllers/GameController");
+    const gameConstants_1 = require("../constants/gameConstants");
     exports.gameRoutes = express_1.default.Router();
+    const gameController = new GameController_1.GameController();
     exports.gameRoutes.get('/', (_req, res) => {
         const content = fs.readFileSync('src/app/game/game.html', 'utf-8');
         res.setHeader('Content-Type', 'text/html');
         res.status(200).send(content);
     });
-    exports.gameRoutes.get('/new', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        const gameId = yield (0, gameController_1.createGame)();
+    exports.gameRoutes.get('/new', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const gameConfig = req.body.config;
+        const gameId = yield gameController.createGame(gameConfig !== null && gameConfig !== void 0 ? gameConfig : gameConstants_1.DUMMY_CREATE_LUDO_CONFIG);
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json({ gameId });
     }));
     exports.gameRoutes.get('/:hash/roll', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const hash = req.params.hash;
-        const response = yield (0, gameController_1.rollTheDice)(hash);
+        const response = yield gameController.rollTheDice(hash);
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(response);
     }));
     exports.gameRoutes.post('/:hash/step', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const hash = req.params.hash;
-        const { figureId } = req.body;
-        const respone = yield (0, gameController_1.stepWithFigure)(hash, figureId);
+        const respone = yield gameController.moveWithPlayer(hash, req.body);
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(respone);
     }));
     exports.gameRoutes.get('/:hash/status', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const hash = req.params.hash;
-        const status = yield (0, gameController_1.getGameStatus)(hash);
+        const status = yield gameController.getGameStatus(hash);
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(status);
     }));
     exports.gameRoutes.get('/:hash', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const hash = req.params.hash;
-        yield (0, gameController_1.getGameStatus)(hash);
+        yield gameController.getGameStatus(hash);
         let content = fs.readFileSync('dist/app/game/games/ludo/ludo.html', 'utf-8');
         content = content.replace('{{hash}}', hash);
         res.setHeader('Content-Type', 'text/html');

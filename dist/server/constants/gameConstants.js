@@ -9,14 +9,19 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.GAME_CONFIG = void 0;
+    exports.DUMMY_CREATE_LUDO_CONFIG = void 0;
     const playerConstants_1 = require("./playerConstants");
-    exports.GAME_CONFIG = {
-        hash: '52029830-b125-4f3f-8e54-d61e26fdf068',
+    exports.DUMMY_CREATE_LUDO_CONFIG = {
         type: 'ludo',
         playerConfigs: playerConstants_1.PLAYERS,
         config: {
-            numberOfFields: 16
+            numberOfFields: 16,
+            stepOutFields: {
+                red: 1,
+                blue: 5,
+                green: 9,
+                yellow: 13
+            }
         }
     };
 });

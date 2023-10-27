@@ -13,68 +13,83 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "uuid", "../business/game/Ludo", "../constants/playerConstants", "../business/game/GameBusiness"], factory);
+        define(["require", "exports", "../business/game/GameBusiness", "../middlewares/CustomError", "../games/ludo/Ludo", "../games/monopoly/Monopoly"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.rollTheDice = exports.stepWithFigure = exports.getGameStatus = exports.createGame = void 0;
-    const uuid_1 = require("uuid");
-    const Ludo_1 = require("../business/game/Ludo");
-    const playerConstants_1 = require("../constants/playerConstants");
+    exports.GameController = void 0;
     const GameBusiness_1 = require("../business/game/GameBusiness");
-    const createGame = () => __awaiter(void 0, void 0, void 0, function* () {
-        const hash = (0, uuid_1.v4)();
-        const gameBusiness = new GameBusiness_1.GameBusiness();
-        yield gameBusiness.createGame({
-            hash,
-            type: 'ludo',
-            playerConfigs: playerConstants_1.PLAYERS,
-            config: {
-                numberOfFields: 16,
-                stepOutFields: {
-                    red: 1,
-                    blue: 5,
-                    green: 9,
-                    yellow: 13
+    const CustomError_1 = require("../middlewares/CustomError");
+    const Ludo_1 = require("../games/ludo/Ludo");
+    const Monopoly_1 = require("../games/monopoly/Monopoly");
+    class GameController {
+        constructor() {
+            this.getGameStatus = (hash) => __awaiter(this, void 0, void 0, function* () {
+                const game = yield this.buildGame(hash);
+                const data = game.getStatus();
+                return {
+                    success: true,
+                    message: '',
+                    data
+                };
+            });
+            this.moveWithPlayer = (hash, config) => __awaiter(this, void 0, void 0, function* () {
+                const game = yield this.buildGame(hash);
+                const data = yield game.move(config);
+                return {
+                    success: true,
+                    message: 'Success',
+                    data
+                };
+            });
+            this.rollTheDice = (hash) => __awaiter(this, void 0, void 0, function* () {
+                const game = yield this.buildGame(hash);
+                const data = yield game.rollDice();
+                return {
+                    success: true,
+                    message: 'Success',
+                    data
+                };
+            });
+            this.response = {
+                success: true,
+                message: '',
+                data: {}
+            };
+            this.gameBusiness = new GameBusiness_1.GameBusiness();
+        }
+        createGame(config) {
+            return __awaiter(this, void 0, void 0, function* () {
+                return yield this.gameBusiness.createGame(config);
+            });
+        }
+        buildGame(hash) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const gameRecord = yield this.gameBusiness.getGameByHash(hash);
+                if (!gameRecord) {
+                    console.error(gameRecord);
+                    throw new CustomError_1.CustomError('A választot játék nem létezik!', 404, true);
                 }
-            }
-        });
-        return hash;
-    });
-    exports.createGame = createGame;
-    const getGameStatus = (hash) => __awaiter(void 0, void 0, void 0, function* () {
-        const ludo = new Ludo_1.Ludo(new GameBusiness_1.GameBusiness());
-        yield ludo.build(hash);
-        const data = ludo.getStatus();
-        return {
-            success: true,
-            message: '',
-            data
-        };
-    });
-    exports.getGameStatus = getGameStatus;
-    const stepWithFigure = (hash, figureId) => __awaiter(void 0, void 0, void 0, function* () {
-        const ludo = new Ludo_1.Ludo(new GameBusiness_1.GameBusiness());
-        yield ludo.build(hash);
-        const data = yield ludo.selectFigureToMove(figureId);
-        return {
-            success: true,
-            message: 'Success',
-            data
-        };
-    });
-    exports.stepWithFigure = stepWithFigure;
-    const rollTheDice = (hash) => __awaiter(void 0, void 0, void 0, function* () {
-        const ludo = new Ludo_1.Ludo(new GameBusiness_1.GameBusiness());
-        yield ludo.build(hash);
-        const data = yield ludo.rollTheDice();
-        return {
-            success: true,
-            message: 'Success',
-            data
-        };
-    });
-    exports.rollTheDice = rollTheDice;
+                let game;
+                switch (gameRecord.type) {
+                    case 'ludo':
+                        game = new Ludo_1.Ludo(this.gameBusiness);
+                        break;
+                    case 'monopoly':
+                        game = new Monopoly_1.Monopoly(this.gameBusiness);
+                        break;
+                    default:
+                        throw new CustomError_1.CustomError('Game creation failed!', 401, true);
+                }
+                if (!gameRecord.config) {
+                    throw new CustomError_1.CustomError('Game could not be loaded!', 500, true);
+                }
+                yield game.build(gameRecord.id, gameRecord.config);
+                return game;
+            });
+        }
+    }
+    exports.GameController = GameController;
 });
-//# sourceMappingURL=gameController.js.map
+//# sourceMappingURL=GameController.js.map

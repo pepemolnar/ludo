@@ -1,9 +1,8 @@
 import { Prisma } from '@prisma/client';
 import { ICreatePlayer } from './playerTypes';
-import { TFieldCount, TStepOutField } from '../../tpyes/ludoTypes';
 import { TGameType } from '../../tpyes/gameTypes';
 import { Player } from '../games/Player';
-import { GameBusiness } from '../games/GameBusiness';
+import { GameBusiness } from '../business/game/GameBusiness';
 import { IResponse } from '../../tpyes/generalTypes';
 import { IPlayerStatus } from '../../tpyes/playerTypes';
 
@@ -14,15 +13,9 @@ export interface IGame {
 }
 
 export interface ICreateGame {
-  hash: string;
   type: TGameType;
   config: Prisma.InputJsonValue;
   playerConfigs: ICreatePlayer[];
-}
-
-export interface IGameDBConfig {
-  numberOfFields: TFieldCount;
-  stepOutFields: TStepOutField;
 }
 
 export interface IStatusResponse extends IResponse {

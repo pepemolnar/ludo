@@ -1,23 +1,22 @@
 import { IStatusResponse, IStatusResponseData } from '../server/types/gameTypes';
-import { IResponse } from './generalTypes';
-import { ILudoPlayerStatus, TSelectableColors } from './playerTypes';
+import { ICreateFigure } from './figureTypes';
+import { IMoveResponse, IMoveResponseData, IRollDiceResponse, IRollDiceResponseData } from './gameTypes';
+import { IPlayerStatus, TSelectableColors } from './playerTypes';
 
-export interface IRollDiceResponse extends IResponse {
-  data: IRollDiceResponseData;
+export interface ILudoRollDiceResponse extends IRollDiceResponse {
+  data: ILudoRollDiceResponseData;
 }
 
-export interface IRollDiceResponseData {
-  rolledNumber: number;
+export interface ILudoRollDiceResponseData extends IRollDiceResponseData {
   isRoundOver: boolean;
-  activePlayerId: number;
   selectableFigureIds: number[];
 }
 
-export interface IStepResponse extends IResponse {
-  data: IStepResponseData;
+export interface ILudoMoveResponse extends IMoveResponse {
+  data: ILudoMoveResponseData;
 }
 
-export interface IStepResponseData {
+export interface ILudoMoveResponseData extends IMoveResponseData {
   activePlayerId: number;
   figureIdToMove: number;
   newPosition: number;
@@ -44,3 +43,22 @@ export type TStepOutField = {
 };
 
 export type TFieldCount = 16 | 24 | 32;
+
+export interface ILudoFigureStatus {
+  id: number;
+  position: number;
+  positionType: TPositionType;
+}
+
+export interface ICreateLudoFigure extends ICreateFigure {
+  config: ICreateLudoFigureConfig;
+}
+
+export interface ICreateLudoFigureConfig {
+  stepOutPosition: number;
+  positionType: TPositionType;
+}
+
+export interface ILudoPlayerStatus extends IPlayerStatus {
+  figures: ILudoFigureStatus[];
+}

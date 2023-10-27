@@ -1,57 +1,78 @@
-import { IGameDBConfig } from '../../types/gameTypes';
 import { LudoPlayer } from './LudoPlayer';
-import { CustomError } from '../../middlewares/CustomError';
-import { GameBusiness } from '../GameBusiness';
+import { GameBusiness } from '../../business/game/GameBusiness';
 import { PlayerBusiness } from '../../business/player/PlayerBusiness';
 import {
+  ILudoPlayerStatus,
+  ILudoRollDiceResponseData,
   ILudoStatusResponseData,
-  IRollDiceResponseData,
-  IStepResponseData,
+  ILudoMoveResponseData,
   TFieldCount,
   TStepOutField
 } from '../../../tpyes/ludoTypes';
-import { ILudoPlayerStatus } from '../../../tpyes/playerTypes';
-import { ILudo } from '../../types/ludoTypes';
+import { ILudo, ILudoGameConfig } from '../../types/ludoTypes';
 import { IPosition } from '../../types/figureTypes';
+import { Game } from '../Game';
+import { IMoveConfig } from '../../../tpyes/gameTypes';
+import { CustomError } from '../../middlewares/CustomError';
 
-export class Ludo implements ILudo {
+export class Ludo extends Game implements ILudo {
   id!: number;
   players: LudoPlayer[];
   numberOfFields!: TFieldCount;
   stepOutFields!: TStepOutField;
-  gameBusiness: GameBusiness;
 
   constructor(gameBusiness: GameBusiness) {
+    super(gameBusiness);
     this.players = [];
-    this.gameBusiness = gameBusiness;
   }
 
-  public async build(hash: string): Promise<void> {
-    const game = await this.gameBusiness.read({
-      hash
-    });
+  public async build(gameId: number, config: object): Promise<void> {
+    const ludoConfig = config as ILudoGameConfig;
+    this.numberOfFields = ludoConfig.numberOfFields;
+    this.stepOutFields = ludoConfig.stepOutFields;
+    this.id = gameId;
 
-    if (!game) {
-      console.error(game);
-      throw new CustomError('A választot játék nem létezik!', 404, true);
+    await this.buildPlayers(gameId);
+  }
+
+  public async move(config: IMoveConfig): Promise<ILudoMoveResponseData> {
+    if (!config.figureId) {
+      throw new CustomError('Did not select a figure!', 402, true);
+    }
+    const activePlayer = this.getActivePlayer() as LudoPlayer;
+    const rolledNumber = await this.getRolledNumber();
+    const responseData: ILudoMoveResponseData = {
+      activePlayerId: activePlayer.id,
+      figureIdToMove: config.figureId,
+      newPosition: 0,
+      positionType: 'IN_HOUSE',
+      nextPlayerId: 0,
+      playerWon: false,
+      opponentFigureIdsHitByPlayer: []
+    };
+
+    const newPosition = await activePlayer.stepWithFigure(this.numberOfFields, rolledNumber, config.figureId);
+    responseData.newPosition = newPosition.position;
+    responseData.positionType = newPosition.positionType;
+
+    if (newPosition.positionType === 'IN_GAME') {
+      responseData.opponentFigureIdsHitByPlayer = await this.hitOpponentFiguresFromPosition(newPosition);
     }
 
-    const config = game.config as unknown as IGameDBConfig;
-    this.numberOfFields = config.numberOfFields;
-    this.stepOutFields = config.stepOutFields;
-    this.id = game.id;
+    responseData.playerWon = this.didPlayerWin();
+    responseData.nextPlayerId = await this.activateNextPlayer();
 
-    await this.buildPlayers(game.id);
+    return responseData;
   }
 
-  public async rollTheDice() {
+  public async rollDice(): Promise<ILudoRollDiceResponseData> {
     const rolledNumber = this.getRollResult();
-    const activePlayer = this.getActivePlayer();
+    const activePlayer = this.getActivePlayer() as LudoPlayer;
     const indexOfSelectableFiguresToMove: number[] = activePlayer.getIdOfSelectableFiguresToMove(
       rolledNumber,
       this.numberOfFields
     );
-    const result: IRollDiceResponseData = {
+    const result: ILudoRollDiceResponseData = {
       rolledNumber,
       isRoundOver: false,
       activePlayerId: activePlayer.id,
@@ -99,72 +120,6 @@ export class Ludo implements ILudo {
     }
   }
 
-  private getRollResult(): number {
-    return Math.round(Math.random() * 5 + 1);
-  }
-
-  private getActivePlayerIndex(): number {
-    for (const [key, player] of Object.entries(this.players)) {
-      if (player.active) {
-        return Number(key);
-      }
-    }
-
-    return 0;
-  }
-
-  private getActivePlayer(): LudoPlayer {
-    for (const player of this.players) {
-      if (player.active) {
-        return player;
-      }
-    }
-
-    return this.players[0];
-  }
-
-  private async activateNextPlayer() {
-    let activePlayerIndex = this.getActivePlayerIndex();
-    const activePlayer = this.players[activePlayerIndex];
-    await activePlayer.setActivity(false);
-
-    activePlayerIndex += 1;
-
-    if (activePlayerIndex >= this.players.length) {
-      activePlayerIndex = 0;
-    }
-
-    await this.players[activePlayerIndex].setActivity(true);
-    return this.players[activePlayerIndex].id;
-  }
-
-  public async selectFigureToMove(figureId: number): Promise<IStepResponseData> {
-    const activePlayer = this.getActivePlayer();
-    const rolledNumber = await this.getRolledNumber();
-    const responseData: IStepResponseData = {
-      activePlayerId: activePlayer.id,
-      figureIdToMove: figureId,
-      newPosition: 0,
-      positionType: 'IN_HOUSE',
-      nextPlayerId: 0,
-      playerWon: false,
-      opponentFigureIdsHitByPlayer: []
-    };
-
-    const newPosition = await activePlayer.stepWithFigure(this.numberOfFields, rolledNumber, figureId);
-    responseData.newPosition = newPosition.position;
-    responseData.positionType = newPosition.positionType;
-
-    if (newPosition.positionType === 'IN_GAME') {
-      responseData.opponentFigureIdsHitByPlayer = await this.hitOpponentFiguresFromPosition(newPosition);
-    }
-
-    responseData.playerWon = this.didPlayerWin();
-    responseData.nextPlayerId = await this.activateNextPlayer();
-
-    return responseData;
-  }
-
   private async hitOpponentFiguresFromPosition(position: IPosition): Promise<number[]> {
     const activePlayer = this.getActivePlayer();
     const figureIdsHit: number[] = [];
@@ -188,8 +143,8 @@ export class Ludo implements ILudo {
     return await this.gameBusiness.getLastRolledNumber(this.id);
   }
 
-  private didPlayerWin(): boolean {
-    const activePlayer = this.getActivePlayer();
+  protected didPlayerWin(): boolean {
+    const activePlayer = this.getActivePlayer() as LudoPlayer;
 
     for (const figure of activePlayer.figures) {
       if (figure.positionType !== 'IN_GOAL') {

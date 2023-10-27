@@ -7,7 +7,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "express", "./homeRoutes", "./userRoutes", "./gameRoutes"], factory);
+        define(["require", "exports", "express", "./homeRoutes", "./gameRoutes"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -15,12 +15,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     exports.routes = void 0;
     const express_1 = __importDefault(require("express"));
     const homeRoutes_1 = require("./homeRoutes");
-    const userRoutes_1 = require("./userRoutes");
     const gameRoutes_1 = require("./gameRoutes");
     exports.routes = express_1.default.Router();
     exports.routes.use(express_1.default.static('dist/app'));
     exports.routes.use(homeRoutes_1.homeRoutes);
-    exports.routes.use('/user', userRoutes_1.userRoutes);
     exports.routes.use('/game', gameRoutes_1.gameRoutes);
 });
 //# sourceMappingURL=routes.js.map

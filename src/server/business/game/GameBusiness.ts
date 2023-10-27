@@ -1,19 +1,28 @@
-import { CustomError } from '../middlewares/CustomError';
-import { GameModel } from '../models/GameModel';
-import { IRollInfo } from '../types/actionTypes';
-import { ICreateGame } from '../types/gameTypes';
-import { ActionBusiness } from '../business/action/ActionBusiness';
-import { PlayerBusiness } from '../business/player/PlayerBusiness';
+import { v4 as uuidv4 } from 'uuid';
+import { CustomError } from '../../middlewares/CustomError';
+import { GameModel } from '../../models/GameModel';
+import { IRollInfo } from '../../types/actionTypes';
+import { ICreateGame } from '../../types/gameTypes';
+import { ActionBusiness } from '../action/ActionBusiness';
+import { PlayerBusiness } from '../player/PlayerBusiness';
 
 export class GameBusiness extends GameModel {
+  public async getGameByHash(hash: string) {
+    return await this.read({
+      hash
+    });
+  }
+
   public async getPlayersOfGame(gameId: number) {
     const playerBusiness = new PlayerBusiness();
     return await playerBusiness.getPlayersByGameId(gameId);
   }
 
   public async createGame(config: ICreateGame) {
+    const hash = uuidv4();
+
     const game = await this.create({
-      hash: config.hash,
+      hash,
       type: config.type,
       config: config.config
     });
@@ -22,6 +31,8 @@ export class GameBusiness extends GameModel {
     const players = await playerBusiness.createPlayers(game.id, config.playerConfigs);
 
     await playerBusiness.setPlayerActivity(players[0].id, true);
+
+    return hash;
   }
 
   public async createRollDiceAction(gameId: number, rolledNumber: number) {
