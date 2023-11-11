@@ -7,18 +7,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "express", "./homeRoutes", "./gameRoutes"], factory);
+        define(["require", "exports", "express", "./generalRoutes", "./gameRoutes"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.routes = void 0;
     const express_1 = __importDefault(require("express"));
-    const homeRoutes_1 = require("./homeRoutes");
+    const generalRoutes_1 = require("./generalRoutes");
     const gameRoutes_1 = require("./gameRoutes");
     exports.routes = express_1.default.Router();
     exports.routes.use(express_1.default.static('dist/app'));
-    exports.routes.use(homeRoutes_1.homeRoutes);
+    exports.routes.use('/', generalRoutes_1.generalRoutes);
     exports.routes.use('/game', gameRoutes_1.gameRoutes);
 });
 //# sourceMappingURL=routes.js.map
