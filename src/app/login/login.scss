@@ -1,0 +1,62 @@
+@import "../variables";
+
+body{
+    background-color: $main-background;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    .container{
+        width: 500px; /* Adjust the width as needed */
+         /* Adjust the height as needed */
+        background-color: $main-backgorund-medium;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 25px;
+        border-radius: 10px;
+
+        .form-container{
+            .login-form{
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            color: white;
+            }
+        }
+        .login-title{
+            color: white;
+            padding: 10px;
+        }
+        .login-format{
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            padding: 5px;
+        }
+        #remember{
+            padding: 5px;
+            text-align: left;
+        }
+        .remember-format{
+            text-align: left;
+            padding: 5px;
+        }
+        .button{
+            color: white;
+            background-color: $main-text-color;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 20px;
+        }
+
+        .login-footer{
+            color: white;
+            .link{
+                margin: 5px;
+                color: $main-text-color;
+            }
+        }
+    }
+}
