@@ -1,9 +1,9 @@
 import express from 'express';
-import { homeRoutes } from './homeRoutes';
+import { generalRoutes } from './generalRoutes';
 import { gameRoutes } from './gameRoutes';
 
 export const routes = express.Router();
 
 routes.use(express.static('dist/app'));
-routes.use(homeRoutes);
+routes.use('/', generalRoutes);
 routes.use('/game', gameRoutes);
