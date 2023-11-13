@@ -92,4 +92,4 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     }
     exports.GameController = GameController;
 });
-//# sourceMappingURL=GameController.js.map
+//# sourceMappingURL=gameController.js.map

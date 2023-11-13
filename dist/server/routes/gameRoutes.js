@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "express", "fs", "../controllers/GameController", "../constants/gameConstants"], factory);
+        define(["require", "exports", "express", "fs", "../controllers/gameController"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -47,18 +47,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     exports.gameRoutes = void 0;
     const express_1 = __importDefault(require("express"));
     const fs = __importStar(require("fs"));
-    const GameController_1 = require("../controllers/GameController");
-    const gameConstants_1 = require("../constants/gameConstants");
+    const gameController_1 = require("../controllers/gameController");
     exports.gameRoutes = express_1.default.Router();
-    const gameController = new GameController_1.GameController();
+    const gameController = new gameController_1.GameController();
     exports.gameRoutes.get('/', (_req, res) => {
         const content = fs.readFileSync('src/app/game/game.html', 'utf-8');
         res.setHeader('Content-Type', 'text/html');
         res.status(200).send(content);
     });
-    exports.gameRoutes.get('/new', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    exports.gameRoutes.post('/new', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const gameConfig = req.body.config;
-        const gameId = yield gameController.createGame(gameConfig !== null && gameConfig !== void 0 ? gameConfig : gameConstants_1.DUMMY_CREATE_LUDO_CONFIG);
+        const gameId = yield gameController.createGame(gameConfig);
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json({ gameId });
     }));
