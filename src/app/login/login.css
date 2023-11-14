@@ -31,6 +31,12 @@
     flex-direction: column;
     padding: 5px;
   }
+  body .container .login-format #username {
+    border-radius: 5px;
+  }
+  body .container .login-format #password {
+    border-radius: 5px;
+  }
   body .container #remember {
     padding: 5px;
     text-align: left;
@@ -86,6 +92,12 @@
     display: flex;
     flex-direction: column;
     padding: 5px;
+  }
+  body .container .login-format #username {
+    border-radius: 5px;
+  }
+  body .container .login-format #password {
+    border-radius: 5px;
   }
   body .container #remember {
     padding: 5px;
@@ -143,6 +155,12 @@
     flex-direction: column;
     padding: 5px;
   }
+  body .container .login-format #username {
+    border-radius: 5px;
+  }
+  body .container .login-format #password {
+    border-radius: 5px;
+  }
   body .container #remember {
     padding: 5px;
     text-align: left;
@@ -199,6 +217,12 @@
     flex-direction: column;
     padding: 5px;
   }
+  body .container .login-format #username {
+    border-radius: 5px;
+  }
+  body .container .login-format #password {
+    border-radius: 5px;
+  }
   body .container #remember {
     padding: 5px;
     text-align: left;
@@ -254,6 +278,12 @@
     display: flex;
     flex-direction: column;
     padding: 5px;
+  }
+  body .container .login-format #username {
+    border-radius: 5px;
+  }
+  body .container .login-format #password {
+    border-radius: 5px;
   }
   body .container #remember {
     padding: 5px;
