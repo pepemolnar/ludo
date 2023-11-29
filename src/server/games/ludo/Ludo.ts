@@ -8,11 +8,11 @@ import {
   ILudoMoveResponseData,
   TFieldCount,
   TStepOutField
-} from '../../../tpyes/ludoTypes';
+} from '../../../app/sharedTpyes/ludoTypes';
 import { ILudo, ILudoGameConfig } from '../../types/ludoTypes';
 import { IPosition } from '../../types/figureTypes';
 import { Game } from '../Game';
-import { IMoveConfig } from '../../../tpyes/gameTypes';
+import { IMoveConfig } from '../../../app/sharedTpyes/gameTypes';
 import { CustomError } from '../../middlewares/CustomError';
 
 export class Ludo extends Game implements ILudo {

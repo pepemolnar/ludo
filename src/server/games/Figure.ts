@@ -1,5 +1,5 @@
 import { Figure as PrismaFigure } from '@prisma/client';
-import { IFigureStatus } from '../../tpyes/figureTypes';
+import { IFigureStatus } from '../../app/sharedTpyes/figureTypes';
 import { IFigure } from '../types/figureTypes';
 import { FigureBusiness } from '../business/figure/FigureBusiness';
 

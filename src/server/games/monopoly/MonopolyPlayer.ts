@@ -1,5 +1,5 @@
 import { Player as PrismaPlayer } from '@prisma/client';
-import { IPlayerStatus, TSelectableColors } from '../../../tpyes/playerTypes';
+import { IPlayerStatus, TSelectableColors } from '../../../app/sharedTpyes/playerTypes';
 import { Player } from '../Player';
 import { IPlayer } from '../../types/playerTypes';
 

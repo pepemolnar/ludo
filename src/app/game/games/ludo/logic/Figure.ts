@@ -1,6 +1,6 @@
-import { IFigureStatus } from '../../../../../tpyes/figureTypes';
-import { TPositionType } from '../../../../../tpyes/ludoTypes';
-import { TSelectableColors } from '../../../../../tpyes/playerTypes';
+import { IFigureStatus } from '../../../../sharedTpyes/figureTypes';
+import { TPositionType } from '../../../../sharedTpyes/ludoTypes';
+import { TSelectableColors } from '../../../../sharedTpyes/playerTypes';
 import { IFigure } from '../../../types/figureTypes';
 
 export class Figure implements IFigure {

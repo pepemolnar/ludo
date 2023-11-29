@@ -59,9 +59,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
             };
             this.gameBusiness = new GameBusiness_1.GameBusiness();
         }
-        createGame(config) {
+        createGame(selectedGame) {
             return __awaiter(this, void 0, void 0, function* () {
-                return yield this.gameBusiness.createGame(config);
+                return yield this.gameBusiness.createGame(selectedGame);
             });
         }
         buildGame(hash) {

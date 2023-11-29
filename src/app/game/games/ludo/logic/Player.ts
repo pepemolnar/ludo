@@ -1,5 +1,5 @@
-import { ILudoFigureStatus, ILudoPlayerStatus, TPositionType } from '../../../../../tpyes/ludoTypes';
-import { TSelectableColors } from '../../../../../tpyes/playerTypes';
+import { ILudoFigureStatus, ILudoPlayerStatus, TPositionType } from '../../../../sharedTpyes/ludoTypes';
+import { TSelectableColors } from '../../../../sharedTpyes/playerTypes';
 import { IPlayer } from '../../../types/playerTypes';
 import { Figure } from './Figure';
 

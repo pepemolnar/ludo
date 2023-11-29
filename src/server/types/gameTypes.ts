@@ -1,10 +1,10 @@
 import { Prisma } from '@prisma/client';
 import { ICreatePlayer } from './playerTypes';
-import { TGameType } from '../../tpyes/gameTypes';
+import { TGameType } from '../../app/sharedTpyes/gameTypes';
 import { Player } from '../games/Player';
 import { GameBusiness } from '../business/game/GameBusiness';
-import { IResponse } from '../../tpyes/generalTypes';
-import { IPlayerStatus } from '../../tpyes/playerTypes';
+import { IResponse } from '../../app/sharedTpyes/generalTypes';
+import { IPlayerStatus } from '../../app/sharedTpyes/playerTypes';
 
 export interface IGame {
   id: number;

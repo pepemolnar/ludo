@@ -1,4 +1,4 @@
-import { IStatusResponse, IStatusResponseData } from '../server/types/gameTypes';
+import { IStatusResponse, IStatusResponseData } from '../../server/types/gameTypes';
 import { ICreateFigure } from './figureTypes';
 import { IMoveResponse, IMoveResponseData, IRollDiceResponse, IRollDiceResponseData } from './gameTypes';
 import { IPlayerStatus, TSelectableColors } from './playerTypes';

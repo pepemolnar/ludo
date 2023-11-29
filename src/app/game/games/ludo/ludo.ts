@@ -1,6 +1,6 @@
-import { ILudoStatusResponse, ILudoStatusResponseData } from '../../../../tpyes/ludoTypes';
-import { TSelectableColors } from '../../../../tpyes/playerTypes';
-import { EMessageType, IMessage, IReadyCheckResultData } from '../../../../tpyes/generalTypes';
+import { ILudoStatusResponse, ILudoStatusResponseData } from '../../../sharedTpyes/ludoTypes';
+import { TSelectableColors } from '../../../sharedTpyes/playerTypes';
+import { EMessageType, IMessage, IReadyCheckResultData } from '../../../sharedTpyes/generalTypes';
 import { Ludo } from './logic/Ludo';
 
 const gameDOM = document.getElementById('game') as HTMLElement;
@@ -154,6 +154,7 @@ function getGameStatus() {
 
       if (response.success) {
         buildGame(response.data);
+        // connectToWebSocket();
       } else {
         console.log(response.message);
       }
@@ -163,170 +164,76 @@ function getGameStatus() {
   };
 }
 
-<<<<<<< HEAD
-getGameStatus();
-=======
-    diceBlockDOM.setAttribute('class', 'dice-block');
+function connectToWebSocket() {
+  const ws = new WebSocket('ws://localhost:4001');
 
-    rolledNumberDOM.setAttribute('id', 'rolled_number');
-    rolledNumberDOM.setAttribute('class', 'rolled-number');
-    rolledNumberDOM.innerText = '0';
+  ws.addEventListener('open', () => {
+    console.log('Connected to server');
+  });
 
-    rollButtonContainerDOM.setAttribute('class', 'roll-button-container');
+  ws.addEventListener('message', (event) => {
+    handleMessage(event.data);
+  });
 
-    rollButtonDOM.setAttribute('id', 'roll_button');
-    rollButtonDOM.setAttribute('class', 'roll-button');
-    rollButtonDOM.setAttribute('active', 'true');
-    rollButtonDOM.innerText = 'Dobás';
+  ws.addEventListener('close', () => {
+    console.log('Disconnected from server');
+  });
+}
 
-    rollButtonContainerDOM.appendChild(rollButtonDOM);
-    diceBlockDOM.appendChild(rolledNumberDOM);
-    diceBlockDOM.appendChild(rollButtonContainerDOM);
+function handleMessage(message: string) {
+  const messageObject: IMessage = JSON.parse(message);
+  switch (messageObject.type) {
+    case EMessageType.CONNECTION:
+      console.log('asd');
+      break;
+    case EMessageType.READY_CHECK_RESULT:
+      handleReadyCheckResultMessage(messageObject);
+      break;
+    default:
+      console.error(`Message type unknown:${messageObject.type}`);
+  }
+}
 
-    boardBlockDOM?.appendChild(diceBlockDOM);
+function handleReadyCheckResultMessage(message: IMessage) {
+  const data = message.data as IReadyCheckResultData;
+
+  if (data && data.ready) {
+    hideModal();
+    return;
   }
 
-  function buildGoals(data: ILudoStatusResponseData) {
-    const goalsBlockDOM = document.getElementById('goals');
+  createWaitingForPlayersModal();
+  showPlayersConnected(data.playersConnected);
+}
 
-    for (const player of data.players) {
-      const goalBlockDOM = document.createElement('div');
-      goalBlockDOM.setAttribute('id', `${player.color}_goal_block`);
-      goalBlockDOM.setAttribute('class', 'goal-block');
+function createWaitingForPlayersModal() {
+  const modalContainerDOM = document.getElementById('waiting-players-modal-container') as HTMLElement;
 
-      for (let i = 1; i <= player.figures.length; i++) {
-        const goalDOM = document.createElement('div');
+  modalContainerDOM.style.display = 'block';
+}
 
-        goalDOM.setAttribute('id', `${player.color}_goal_${i}`);
-        goalDOM.setAttribute('class', `goal ${player.color}-goal`);
+function showPlayersConnected(playersConnected: string[]) {
+  const modalDOM = document.getElementById('waiting-players-modal') as HTMLElement;
+  modalDOM.innerHTML = '';
 
-        goalBlockDOM.appendChild(goalDOM);
-      }
-
-      goalsBlockDOM?.appendChild(goalBlockDOM);
-    }
-  }
-
-  function buildFigures(data: ILudoStatusResponseData) {
-    for (const player of data.players) {
-      for (const figure of player.figures) {
-        const figureDOM = document.createElement('a');
-
-        figureDOM.setAttribute('id', `${player.color}_figure_${figure.id}`);
-        figureDOM.setAttribute('class', `figure ${player.color}-figure`);
-        figureDOM.setAttribute('data-color', player.color);
-        figureDOM.setAttribute('data-number', String(figure.id));
-
-        let parentDOM = document.getElementById(`${player.color}_house`);
-
-        switch (figure.positionType) {
-          case 'IN_HOUSE':
-            break;
-          case 'IN_GAME':
-            parentDOM = document.getElementById(`field_${figure.position}`);
-            break;
-          case 'IN_GOAL':
-            parentDOM = document.getElementById(`${player.color}_goal_${figure.position}`);
-            break;
-          default:
-            console.error(`Could not find position of ${player.color} player's figure with ID ${figure.id}!`);
-        }
-
-        parentDOM?.appendChild(figureDOM);
-      }
-    }
-  }
-
-  function getGameStatus() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', `/game/${hash}/status`, true);
-    xhr.send();
-
-    xhr.onload = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        const response: ILudoStatusResponse = JSON.parse(xhr.response);
-
-        if (response.success) {
-          buildGame(response.data);
-          connectToWebSocket();
-        } else {
-          console.log(response.message);
-        }
-      } else {
-        console.log('Nem sikerült új játékot csinálni!');
-      }
-    };
-  }
-
-  function connectToWebSocket() {
-    const ws = new WebSocket('ws://localhost:4001');
-
-    ws.addEventListener('open', () => {
-      console.log('Connected to server');
-      const readyRequest: IMessage = {
-        type: EMessageType.READY_CHECK,
-        data: 'Is all player connected?'
-      };
-
-      ws.send(JSON.stringify(readyRequest));
-    });
-
-    ws.addEventListener('message', (event) => {
-      handleMessage(event.data as IMessage);
-    });
-
-    ws.addEventListener('close', () => {
-      console.log('Disconnected from server');
-    });
-  }
-
-  function handleMessage(message: IMessage) {
-    switch (message.type) {
-      case EMessageType.READY_CHECK_RESULT:
-        handleReadyCheckResultMessage(message);
-        break;
-      case EMessageType.CONNECTION:
-        console.log('asd');
-        break;
-      default:
-        console.error(`Message type unknown:${message.type}`);
-    }
-  }
-
-  function handleReadyCheckResultMessage(message: IMessage) {
-    const data = message.data as IReadyCheckResultData;
-
-    if (data && data.ready) {
-      return;
-    }
-
-    createWaitingForPlayersModal();
-    showPlayersConnected(data.playersConnected);
-  }
-
-  function createWaitingForPlayersModal() {
-    const modalContainerDOM = document.getElementById('waiting-players-modal-container') as HTMLElement;
-
-    modalContainerDOM.style.display = 'block';
-  }
-
-  function showPlayersConnected(playersConnected: string[]) {
-    const modalDOM = document.getElementById('waiting-players-modal') as HTMLElement;
+  for (const playerName of playersConnected) {
     const playerContainerDOM = document.createElement('div');
+    const playerNameDOM = document.createElement('div');
 
-    modalDOM.append(playerContainerDOM);
+    playerNameDOM.setAttribute('class', 'player-name');
+    playerNameDOM.innerHTML = playerName;
 
     playerContainerDOM.setAttribute('class', 'connected-player-container');
+    playerContainerDOM.append(playerNameDOM);
 
-    for (const playerName of playersConnected) {
-      const playerNameDOM = document.createElement('div');
-
-      playerNameDOM.setAttribute('class', 'player-name');
-      playerNameDOM.innerHTML = playerName;
-      playerContainerDOM.append(playerNameDOM);
-    }
+    modalDOM.append(playerContainerDOM);
   }
+}
 
-  getGameStatus();
-};
->>>>>>> 6f1ea22e9eb9448fd36d5e928c5fa99f3a45ade6
+function hideModal() {
+  const modalContainerDOM = document.getElementById('waiting-players-modal-container') as HTMLElement;
+
+  modalContainerDOM.style.display = 'none';
+}
+
+getGameStatus();

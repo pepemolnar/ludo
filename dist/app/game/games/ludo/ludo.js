@@ -4,11 +4,12 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./logic/Ludo"], factory);
+        define(["require", "exports", "../../../sharedTpyes/generalTypes", "./logic/Ludo"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    const generalTypes_1 = require("../../../sharedTpyes/generalTypes");
     const Ludo_1 = require("./logic/Ludo");
     const gameDOM = document.getElementById('game');
     const hash = gameDOM === null || gameDOM === void 0 ? void 0 : gameDOM.getAttribute('data-id');
@@ -125,6 +126,7 @@
                 const response = JSON.parse(xhr.response);
                 if (response.success) {
                     buildGame(response.data);
+                    // connectToWebSocket();
                 }
                 else {
                     console.log(response.message);
@@ -134,6 +136,61 @@
                 console.log('Nem sikerült új játékot csinálni!');
             }
         };
+    }
+    function connectToWebSocket() {
+        const ws = new WebSocket('ws://localhost:4001');
+        ws.addEventListener('open', () => {
+            console.log('Connected to server');
+        });
+        ws.addEventListener('message', (event) => {
+            handleMessage(event.data);
+        });
+        ws.addEventListener('close', () => {
+            console.log('Disconnected from server');
+        });
+    }
+    function handleMessage(message) {
+        const messageObject = JSON.parse(message);
+        switch (messageObject.type) {
+            case generalTypes_1.EMessageType.CONNECTION:
+                console.log('asd');
+                break;
+            case generalTypes_1.EMessageType.READY_CHECK_RESULT:
+                handleReadyCheckResultMessage(messageObject);
+                break;
+            default:
+                console.error(`Message type unknown:${messageObject.type}`);
+        }
+    }
+    function handleReadyCheckResultMessage(message) {
+        const data = message.data;
+        if (data && data.ready) {
+            hideModal();
+            return;
+        }
+        createWaitingForPlayersModal();
+        showPlayersConnected(data.playersConnected);
+    }
+    function createWaitingForPlayersModal() {
+        const modalContainerDOM = document.getElementById('waiting-players-modal-container');
+        modalContainerDOM.style.display = 'block';
+    }
+    function showPlayersConnected(playersConnected) {
+        const modalDOM = document.getElementById('waiting-players-modal');
+        modalDOM.innerHTML = '';
+        for (const playerName of playersConnected) {
+            const playerContainerDOM = document.createElement('div');
+            const playerNameDOM = document.createElement('div');
+            playerNameDOM.setAttribute('class', 'player-name');
+            playerNameDOM.innerHTML = playerName;
+            playerContainerDOM.setAttribute('class', 'connected-player-container');
+            playerContainerDOM.append(playerNameDOM);
+            modalDOM.append(playerContainerDOM);
+        }
+    }
+    function hideModal() {
+        const modalContainerDOM = document.getElementById('waiting-players-modal-container');
+        modalContainerDOM.style.display = 'none';
     }
     getGameStatus();
 });

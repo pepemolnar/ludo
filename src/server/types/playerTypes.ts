@@ -1,5 +1,5 @@
-import { ICreateFigure } from '../../tpyes/figureTypes';
-import { TSelectableColors } from '../../tpyes/playerTypes';
+import { ICreateFigure } from '../../app/sharedTpyes/figureTypes';
+import { TSelectableColors } from '../../app/sharedTpyes/playerTypes';
 
 export interface IPlayer {
   id: number;
@@ -10,6 +10,6 @@ export interface IPlayer {
 export interface ICreatePlayer {
   userId: number;
   active: boolean;
-  color: TSelectableColors;
+  color: string;
   figures?: ICreateFigure[];
 }

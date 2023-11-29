@@ -1,6 +1,6 @@
 import { Figure as PrismaFigure } from '@prisma/client';
 import { IPosition } from '../../types/figureTypes';
-import { ILudoFigureStatus, TPositionType } from '../../../tpyes/ludoTypes';
+import { ILudoFigureStatus, TPositionType } from '../../../app/sharedTpyes/ludoTypes';
 import { Figure } from '../Figure';
 import { ILudoFigure, ILudoFigureDBConfig } from '../../types/ludoTypes';
 

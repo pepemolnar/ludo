@@ -56,8 +56,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         res.status(200).send(content);
     });
     exports.gameRoutes.post('/new', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        const gameConfig = req.body.config;
-        const gameId = yield gameController.createGame(gameConfig);
+        const selectedGame = req.body.selectedGame;
+        const gameId = yield gameController.createGame(selectedGame);
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json({ gameId });
     }));

@@ -4,7 +4,7 @@ import {
   ILudoPlayerStatus,
   ILudoMoveResponse,
   ILudoRollDiceResponse
-} from '../../../../../tpyes/ludoTypes';
+} from '../../../../sharedTpyes/ludoTypes';
 import { Player } from './Player';
 
 export class Ludo {
