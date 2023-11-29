@@ -14,8 +14,8 @@ gameRoutes.get('/', (_req: Request, res: Response) => {
 });
 
 gameRoutes.post('/new', async (req: Request, res: Response) => {
-  const gameConfig = req.body.config;
-  const gameId = await gameController.createGame(gameConfig);
+  const selectedGame = req.body.selectedGame;
+  const gameId = await gameController.createGame(selectedGame);
 
   res.setHeader('Content-Type', 'application/json');
   res.status(200).json({ gameId });

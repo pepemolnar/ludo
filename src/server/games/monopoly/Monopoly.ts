@@ -10,7 +10,6 @@ import { MonopolyPlayer } from './MonopolyPlayer';
 import { IMoveConfig, IMoveResponseData } from '../../../tpyes/gameTypes';
 
 export class Monopoly extends Game implements IGame {
-  id!: number;
   players: Player[];
   numberOfFields!: TFieldCount;
   stepOutFields!: TStepOutField;

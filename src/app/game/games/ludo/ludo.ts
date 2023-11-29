@@ -1,5 +1,6 @@
 import { ILudoStatusResponse, ILudoStatusResponseData } from '../../../../tpyes/ludoTypes';
 import { TSelectableColors } from '../../../../tpyes/playerTypes';
+import { EMessageType, IMessage, IReadyCheckResultData } from '../../../../tpyes/generalTypes';
 import { Ludo } from './logic/Ludo';
 
 window.onload = (event) => {
@@ -154,6 +155,7 @@ window.onload = (event) => {
 
         if (response.success) {
           buildGame(response.data);
+          connectToWebSocket();
         } else {
           console.log(response.message);
         }
@@ -161,6 +163,75 @@ window.onload = (event) => {
         console.log('Nem sikerült új játékot csinálni!');
       }
     };
+  }
+
+  function connectToWebSocket() {
+    const ws = new WebSocket('ws://localhost:4001');
+
+    ws.addEventListener('open', () => {
+      console.log('Connected to server');
+      const readyRequest: IMessage = {
+        type: EMessageType.READY_CHECK,
+        data: 'Is all player connected?'
+      };
+
+      ws.send(JSON.stringify(readyRequest));
+    });
+
+    ws.addEventListener('message', (event) => {
+      handleMessage(event.data as IMessage);
+    });
+
+    ws.addEventListener('close', () => {
+      console.log('Disconnected from server');
+    });
+  }
+
+  function handleMessage(message: IMessage) {
+    switch (message.type) {
+      case EMessageType.READY_CHECK_RESULT:
+        handleReadyCheckResultMessage(message);
+        break;
+      case EMessageType.CONNECTION:
+        console.log('asd');
+        break;
+      default:
+        console.error(`Message type unknown:${message.type}`);
+    }
+  }
+
+  function handleReadyCheckResultMessage(message: IMessage) {
+    const data = message.data as IReadyCheckResultData;
+
+    if (data && data.ready) {
+      return;
+    }
+
+    createWaitingForPlayersModal();
+    showPlayersConnected(data.playersConnected);
+  }
+
+  function createWaitingForPlayersModal() {
+    const modalContainerDOM = document.getElementById('waiting-players-modal-container') as HTMLElement;
+
+    modalContainerDOM.style.display = 'block';
+  }
+
+  function showPlayersConnected(playersConnected: string[]) {
+    const modalDOM = document.getElementById('waiting-players-modal') as HTMLElement;
+    const playerContainerDOM = document.createElement('div');
+
+    modalDOM.append(playerContainerDOM);
+
+    playerContainerDOM.setAttribute('class', 'connected-player-container');
+
+    for (const playerName of playersConnected) {
+      const playerNameDOM = document.createElement('div');
+
+      playerNameDOM.setAttribute('class', 'player-name');
+      playerNameDOM.innerHTML = playerName;
+      playerContainerDOM.append(playerNameDOM);
+    }
   }
 
   getGameStatus();

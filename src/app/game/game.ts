@@ -1,11 +1,9 @@
-import { DUMMY_CREATE_LUDO_CONFIG } from './constants/gameConstants';
-
 window.onload = (event) => {
-  const config = DUMMY_CREATE_LUDO_CONFIG;
+  const selectedGame = 'ludo16';
   const xhr = new XMLHttpRequest();
   xhr.open('POST', '/game/new', true);
-  xhr.send(JSON.stringify({ config }));
-  xhr.send();
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({ selectedGame }));
 
   xhr.onload = function (data) {
     if (xhr.readyState === 4 && xhr.status === 200) {

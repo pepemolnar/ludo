@@ -2,9 +2,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { CustomError } from '../../middlewares/CustomError';
 import { GameModel } from '../../models/GameModel';
 import { IRollInfo } from '../../types/actionTypes';
-import { ICreateGame } from '../../types/gameTypes';
+import { TSelectableGames } from '../../types/gameTypes';
 import { ActionBusiness } from '../action/ActionBusiness';
 import { PlayerBusiness } from '../player/PlayerBusiness';
+import { GAME_CONFIGS } from '../../constants/gameConstants';
+import { IPlayer } from 'src/server/types/playerTypes';
 
 export class GameBusiness extends GameModel {
   public async getGameByHash(hash: string) {
@@ -18,19 +20,22 @@ export class GameBusiness extends GameModel {
     return await playerBusiness.getPlayersByGameId(gameId);
   }
 
-  public async createGame(config: ICreateGame) {
+  public async createGame(selectedGame: TSelectableGames) {
     const hash = uuidv4();
+
+    const data = GAME_CONFIGS[selectedGame];
 
     const game = await this.create({
       hash,
-      type: config.type,
-      config: config.config
+      type: data.type,
+      config: data.config
     });
     const playerBusiness = new PlayerBusiness();
 
-    const players = await playerBusiness.createPlayers(game.id, config.playerConfigs);
+    const players = await playerBusiness.createPlayers(game.id, data.playerConfigs);
+    const firstPlayer = players[0] as IPlayer;
 
-    await playerBusiness.setPlayerActivity(players[0].id, true);
+    await playerBusiness.setPlayerActivity(firstPlayer.id, true);
 
     return hash;
   }

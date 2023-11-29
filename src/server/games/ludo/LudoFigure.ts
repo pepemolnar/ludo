@@ -5,8 +5,6 @@ import { Figure } from '../Figure';
 import { ILudoFigure, ILudoFigureDBConfig } from '../../types/ludoTypes';
 
 export class LudoFigure extends Figure implements ILudoFigure {
-  id!: number;
-  position!: number;
   positionType!: TPositionType;
   stepOutPosition!: number;
 
