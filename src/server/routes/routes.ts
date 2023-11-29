@@ -4,7 +4,7 @@ import { gameRoutes } from './gameRoutes';
 
 export const routes = express.Router();
 
-routes.use(express.static('dist/app'));
+routes.use(express.static('dist'));
 routes.use('/', generalRoutes);
 routes.use('/game', gameRoutes);
 

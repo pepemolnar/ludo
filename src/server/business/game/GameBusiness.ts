@@ -6,7 +6,7 @@ import { TSelectableGames } from '../../types/gameTypes';
 import { ActionBusiness } from '../action/ActionBusiness';
 import { PlayerBusiness } from '../player/PlayerBusiness';
 import { GAME_CONFIGS } from '../../constants/gameConstants';
-import { IPlayer } from 'src/server/types/playerTypes';
+import { IPlayer } from '../../types/playerTypes';
 
 export class GameBusiness extends GameModel {
   public async getGameByHash(hash: string) {

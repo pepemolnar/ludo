@@ -1,4 +1,4 @@
-import { WS_PORT } from 'src/server/constants/generalConstants';
+import { WS_PORT } from '../../constants/generalConstants';
 import WebSocket from 'ws';
 
 export class SocketServer {

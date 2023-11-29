@@ -22,3 +22,5 @@ export interface IReadyCheckResultData {
 }
 
 export type TMessageData = string | boolean | IReadyCheckResultData;
+
+export default IResponse;
