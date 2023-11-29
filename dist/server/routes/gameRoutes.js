@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "express", "fs", "../controllers/GameController"], factory);
+        define(["require", "exports", "express", "fs", "../controllers/gameController"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -47,9 +47,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     exports.gameRoutes = void 0;
     const express_1 = __importDefault(require("express"));
     const fs = __importStar(require("fs"));
-    const GameController_1 = require("../controllers/GameController");
+    const gameController_1 = require("../controllers/gameController");
     exports.gameRoutes = express_1.default.Router();
-    const gameController = new GameController_1.GameController();
+    const gameController = new gameController_1.GameController();
     exports.gameRoutes.get('/', (_req, res) => {
         const content = fs.readFileSync('src/app/game/game.html', 'utf-8');
         res.setHeader('Content-Type', 'text/html');

@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
 import express from 'express';
 import * as fs from 'fs';
-import { GameController } from '../controllers/GameController';
+import { GameController } from '../controllers/gameController';
 
 export const gameRoutes = express.Router();
 
