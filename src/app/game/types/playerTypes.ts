@@ -5,8 +5,3 @@ export interface IPlayer {
   active: boolean;
   color: TSelectableColors;
 }
-
-export interface IPlayerColor {
-  name: TSelectableColors;
-  hex: string;
-}

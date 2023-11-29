@@ -25,3 +25,5 @@ export interface IStatusResponse extends IResponse {
 export interface IStatusResponseData {
   players: IPlayerStatus[];
 }
+
+export type TSelectableGames = 'ludo16';

@@ -1,4 +1,4 @@
-import { ICreateGame, IStatusResponse } from '../types/gameTypes';
+import { IStatusResponse, TSelectableGames } from '../types/gameTypes';
 import { IMoveConfig, IMoveResponse, IRollDiceResponse } from '../../tpyes/gameTypes';
 import { GameBusiness } from '../business/game/GameBusiness';
 import { CustomError } from '../middlewares/CustomError';
@@ -20,8 +20,8 @@ export class GameController {
     this.gameBusiness = new GameBusiness();
   }
 
-  public async createGame(config: ICreateGame) {
-    return await this.gameBusiness.createGame(config);
+  public async createGame(selectedGame: TSelectableGames) {
+    return await this.gameBusiness.createGame(selectedGame);
   }
 
   public getGameStatus = async (hash: string): Promise<IStatusResponse> => {

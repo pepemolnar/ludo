@@ -16,7 +16,6 @@ import { IMoveConfig } from '../../../tpyes/gameTypes';
 import { CustomError } from '../../middlewares/CustomError';
 
 export class Ludo extends Game implements ILudo {
-  id!: number;
   players: LudoPlayer[];
   numberOfFields!: TFieldCount;
   stepOutFields!: TStepOutField;
