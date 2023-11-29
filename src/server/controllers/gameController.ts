@@ -1,10 +1,10 @@
 import { IStatusResponse, TSelectableGames } from '../types/gameTypes';
-import { IMoveConfig, IMoveResponse, IRollDiceResponse } from '../../tpyes/gameTypes';
+import { IMoveConfig, IMoveResponse, IRollDiceResponse } from '../../app/sharedTpyes/gameTypes';
 import { GameBusiness } from '../business/game/GameBusiness';
 import { CustomError } from '../middlewares/CustomError';
 import { Ludo } from '../games/ludo/Ludo';
 import { Monopoly } from '../games/monopoly/Monopoly';
-import { IResponse } from '../../tpyes/generalTypes';
+import { IResponse } from '../../app/sharedTpyes/generalTypes';
 import { Prisma } from '@prisma/client';
 
 export class GameController {

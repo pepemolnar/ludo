@@ -1,7 +1,7 @@
 import { IGame, IStatusResponseData } from '../types/gameTypes';
 import { Player } from './Player';
 import { GameBusiness } from '../business/game/GameBusiness';
-import { IMoveConfig, IMoveResponseData, IRollDiceResponseData } from '../../tpyes/gameTypes';
+import { IMoveConfig, IMoveResponseData, IRollDiceResponseData } from '../../app/sharedTpyes/gameTypes';
 
 export abstract class Game implements IGame {
   id!: number;

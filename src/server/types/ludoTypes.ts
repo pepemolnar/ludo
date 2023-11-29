@@ -1,5 +1,5 @@
-import { ICreateLudoFigure, TFieldCount, TPositionType, TStepOutField } from '../../tpyes/ludoTypes';
-import { TSelectableColors } from '../../tpyes/playerTypes';
+import { ICreateLudoFigure, TFieldCount, TPositionType, TStepOutField } from '../../app/sharedTpyes/ludoTypes';
+import { TSelectableColors } from '../../app/sharedTpyes/playerTypes';
 import { LudoFigure } from '../games/ludo/LudoFigure';
 import { LudoPlayer } from '../games/ludo/LudoPlayer';
 import { IFigure } from './figureTypes';

@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { FigureModel } from '../../models/FigureModel';
-import { ICreateFigure } from '../../../tpyes/figureTypes';
+import { ICreateFigure } from '../../../app/sharedTpyes/figureTypes';
 
 export class FigureBusiness extends FigureModel {
   public async getFiguresByPlayerId(playerId: number) {

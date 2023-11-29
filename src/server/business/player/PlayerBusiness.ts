@@ -46,4 +46,10 @@ export class PlayerBusiness extends PlayerModel {
   public async setPlayerActivity(id: number, active: boolean) {
     await this.update({ id }, { active });
   }
+
+  public async getPlayerById(id: number) {
+    return await this.read({
+      id
+    });
+  }
 }

@@ -21,6 +21,6 @@ export interface IReadyCheckResultData {
   playersConnected: string[];
 }
 
-export type TMessageData = string | boolean | IReadyCheckResultData;
+export type TMessageData = any;
 
 export default IResponse;

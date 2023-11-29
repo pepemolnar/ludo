@@ -1,4 +1,4 @@
-import { TPositionType } from '../../../tpyes/ludoTypes';
+import { TPositionType } from '../../sharedTpyes/ludoTypes';
 
 export interface IFigure {
   id: number;

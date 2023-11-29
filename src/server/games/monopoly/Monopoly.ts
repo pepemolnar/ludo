@@ -1,13 +1,13 @@
 import { GameBusiness } from '../../business/game/GameBusiness';
 import { PlayerBusiness } from '../../business/player/PlayerBusiness';
-import { TFieldCount, TStepOutField } from '../../../tpyes/ludoTypes';
+import { TFieldCount, TStepOutField } from '../../../app/sharedTpyes/ludoTypes';
 import { ILudoGameConfig } from '../../types/ludoTypes';
 import { Game } from '../Game';
 import { Player } from '../Player';
 import { IGame, IStatusResponseData } from '../../types/gameTypes';
-import { IPlayerStatus } from '../../../tpyes/playerTypes';
+import { IPlayerStatus } from '../../../app/sharedTpyes/playerTypes';
 import { MonopolyPlayer } from './MonopolyPlayer';
-import { IMoveConfig, IMoveResponseData } from '../../../tpyes/gameTypes';
+import { IMoveConfig, IMoveResponseData } from '../../../app/sharedTpyes/gameTypes';
 
 export class Monopoly extends Game implements IGame {
   players: Player[];

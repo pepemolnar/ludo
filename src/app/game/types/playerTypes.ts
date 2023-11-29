@@ -1,4 +1,4 @@
-import { TSelectableColors } from '../../../tpyes/playerTypes';
+import { TSelectableColors } from '../../sharedTpyes/playerTypes';
 
 export interface IPlayer {
   id: number;

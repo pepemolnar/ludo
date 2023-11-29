@@ -1,5 +1,5 @@
-import { TPositionType } from '../../tpyes/ludoTypes';
-import { TSelectableColors } from '../../tpyes/playerTypes';
+import { TPositionType } from '../../app/sharedTpyes/ludoTypes';
+import { TSelectableColors } from '../../app/sharedTpyes/playerTypes';
 import { FigureBusiness } from '../business/figure/FigureBusiness';
 
 export interface IFigure {

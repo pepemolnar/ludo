@@ -1,4 +1,4 @@
-import { TSelectableColors } from '../../tpyes/playerTypes';
+import { TSelectableColors } from '../../app/sharedTpyes/playerTypes';
 import { MonopolyPlayer } from '../games/monopoly/MonopolyPlayer';
 import { ICreateGame, IGame } from './gameTypes';
 import { ICreatePlayer, IPlayer } from './playerTypes';
