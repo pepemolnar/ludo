@@ -6,7 +6,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "node",
-    "outDir": "dist/app"
+    "outDir": "dist"
   },
   "include": ["src/app/**/*", "src/types/**/*"]
 }

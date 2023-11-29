@@ -1,16 +1,13 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
-    "outDir": "dist/server",
-    "strict": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "resolveJsonModule": true
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true
   },
-  "include": ["./src/server/**/*", "./src/types/**/*"]
+  "include": ["./src/server/**/*", "./src/types/**/*", "./src/index.ts"]
 }

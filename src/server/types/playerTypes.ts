@@ -10,6 +10,6 @@ export interface IPlayer {
 export interface ICreatePlayer {
   userId: number;
   active: boolean;
-  color: TSelectableColors;
+  color: string;
   figures?: ICreateFigure[];
 }
